@@ -1,67 +1,812 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Student Desk</title>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="color-scheme" content="light dark"/>
+<link rel="icon" href="data:,"/>
+<title>Shwe Pyi Soe — School Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Noto+Sans:wght@400;500;600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-:root{font-family:'DM Sans',sans-serif;color:#24352f;background:#f6f7f4;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid #b6d86e;outline-offset:4px}.app{display:flex;min-height:100vh}.sidebar{width:236px;background:#fff;border-right:1px solid #e4e8df;padding:34px 22px;display:flex;flex-direction:column;position:fixed;inset:0 auto 0 0}.brand{display:flex;align-items:center;gap:11px;font-family:Manrope,sans-serif;font-size:21px;font-weight:800;letter-spacing:-1px}.logo{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:#254b3c;color:#d9edb5;font-size:24px}.section-label{font-size:10px;font-weight:700;letter-spacing:1.8px;color:#929d96;margin:51px 12px 17px}.nav{border:0;background:transparent;padding:13px 14px;border-radius:9px;text-align:left;color:#738078;display:flex;gap:12px;align-items:center;margin-bottom:7px;width:100%;font-weight:500;font-size:14px}.nav.active{background:#edf3e7;color:#254b3c;font-weight:700}.nav svg{width:19px;height:19px}.sidebar-bottom{margin-top:auto;border-top:1px solid #edf0e9;padding-top:22px;font-size:12px;color:#8a968d;line-height:1.8}.sidebar-bottom strong{color:#506257;font-weight:600}.status-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#8daf61;margin-right:6px}.main{margin-left:236px;width:calc(100% - 236px);padding:0 48px 40px;max-width:1700px}.topbar{height:88px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e3e8df;font-size:12px;color:#8b968d}.breadcrumb{display:flex;gap:10px}.breadcrumb strong{color:#54665a;font-weight:500}.profile{display:flex;gap:10px;align-items:center;color:#55645b}.avatar{height:32px;width:32px;display:grid;place-items:center;border-radius:50%;background:#e4eadb;color:#44613c;font-size:11px;font-weight:700}.heading{margin:38px 0 27px;display:flex;justify-content:space-between;align-items:center;gap:20px}.eyebrow{text-transform:uppercase;color:#82916f;font-size:10px;font-weight:700;letter-spacing:2px;margin:0 0 10px}h1{font-family:Manrope,sans-serif;font-size:31px;letter-spacing:-1.3px;margin:0 0 9px;font-weight:800} .subtitle{font-size:13px;color:#869086;margin:0;line-height:1.6}.primary{border:0;background:#294e3e;color:white;border-radius:8px;padding:12px 17px;font-weight:500;font-size:12px;display:inline-flex;gap:9px;align-items:center;justify-content:center;white-space:nowrap}.primary:hover{background:#1a3c2c}.primary:disabled{opacity:.45;cursor:default}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:29px}.stat{background:#fff;border:1px solid #e3e7df;border-radius:12px;padding:21px 23px}.stat-head{display:flex;justify-content:space-between;align-items:center;color:#7e8a80;font-size:12px}.stat-icon{background:#f2f5ed;border-radius:8px;width:30px;height:30px;display:grid;place-items:center;color:#6d8958}.stat-value{font-family:Manrope,sans-serif;font-size:30px;font-weight:700;margin:10px 0 7px;letter-spacing:-1px}.stat-foot{font-size:11px;color:#929a91}.stat-foot span{color:#688549}.content{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:22px}.panel{background:white;border:1px solid #e3e7df;border-radius:12px;overflow:hidden}.panel-heading{padding:23px 24px 19px;display:flex;align-items:center;justify-content:space-between;gap:10px}h2{font-family:Manrope,sans-serif;font-size:15px;letter-spacing:-.3px;margin:0}.count{background:#f0f3eb;color:#788a6a;padding:4px 8px;border-radius:5px;font-size:10px;margin-left:8px;font-weight:500}.search-wrap{padding:0 24px 21px;position:relative}.search-wrap svg{position:absolute;left:37px;top:12px;width:16px;color:#97a18f}.search{width:100%;border:1px solid #e5e9df;background:#fafbf8;padding:11px 12px 11px 38px;border-radius:7px;font-size:12px;color:#324b3c;outline:none}.search:focus{border-color:#94ab76;box-shadow:0 0 0 3px #edf3e7}table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}th{background:#fafbf8;border-top:1px solid #edf0e7;border-bottom:1px solid #edf0e7;padding:13px 18px;font-size:9px;letter-spacing:1px;font-weight:600;color:#8d9788}th:first-child,td:first-child{padding-left:24px}td{padding:19px 18px;border-bottom:1px solid #eff1eb;color:#718071}.student-cell{display:flex;gap:11px;align-items:center;white-space:nowrap}.student-avatar{width:33px;height:33px;background:#eef1e6;color:#7c8c59;display:grid;place-items:center;border-radius:10px;font-size:10px;font-weight:700;flex-shrink:0}.student-name{color:#3e5142;font-weight:600}.student-id{font-size:10px;color:#9aa294;margin-top:4px}.grade{display:inline-block;padding:5px 9px;border-radius:5px;font-size:10px;background:#edf4e5;color:#6a8845;white-space:nowrap}.grade.B{background:#edf2f8;color:#5f81a0}.grade.C{background:#fcf4e4;color:#af873d}.grade.D{background:#faece8;color:#b76d5e}.mark{font-weight:700;color:#3e5142}.table-footer{padding:16px 24px;font-size:10px;color:#9aa291;display:flex;justify-content:space-between}.empty{text-align:center;padding:50px 20px;color:#929d89;line-height:1.8}.empty strong{display:block;color:#556b4b;font-size:14px;margin-bottom:4px}.top-student{padding:24px;background:#f0f3e8;border-color:#e2e8d6}.top-label{font-size:10px;letter-spacing:1.6px;color:#7d8f65;font-weight:700;display:flex;align-items:center;gap:7px}.trophy{font-size:23px;margin:25px 0 15px}.top-student h3{font-family:Manrope,sans-serif;font-size:19px;letter-spacing:-.5px;margin:0 0 7px;overflow-wrap:anywhere}.top-id{color:#8d9b7b;font-size:11px}.score{margin:24px 0 15px;font-family:Manrope,sans-serif;font-size:40px;font-weight:700;letter-spacing:-1.5px}.score small{font-size:15px;color:#8e9c7c;font-weight:400;letter-spacing:0}.progress{height:5px;background:#e1e8d5;border-radius:10px;overflow:hidden}.progress div{height:100%;background:#8ea967;transition:width .3s}.top-note{font-size:10px;color:#8a9a77;margin:12px 0 0;line-height:1.6}.guide{margin-top:20px;padding:23px}.guide h2{margin-bottom:19px}.guide-row{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:11px;color:#8d9788}.guide-row .grade{min-width:58px;text-align:center}.footnote{font-size:10px;color:#9aa393;margin-top:22px;display:flex;align-items:center;gap:7px}.footer{display:flex;justify-content:space-between;margin-top:29px;color:#a2aa9b;font-size:10px}.dialog{border:1px solid #e1e7d9;border-radius:15px;padding:28px;width:min(440px,calc(100% - 32px));color:#304737;box-shadow:0 24px 100px #1a30282b}.dialog::backdrop{background:#19302466;backdrop-filter:blur(3px)}.dialog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.close{background:none;border:0;color:#7b8774;font-size:24px;padding:0 4px}.dialog p{font-size:12px;line-height:1.6;color:#8b9683;margin:0 0 22px}.field{display:flex;flex-direction:column;gap:7px;margin:15px 0;font-size:12px;color:#65765b}.field input{width:100%;border:1px solid #dce3d5;border-radius:7px;padding:11px;color:#304737;outline-color:#97ae7c}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.form-actions{display:flex;justify-content:flex-end;margin-top:24px}.error{color:#ac5548;font-size:12px;min-height:16px}.mobile-brand{display:none}svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round} @media(min-width:1450px){.main{padding-left:64px;padding-right:64px}.content{grid-template-columns:minmax(0,1fr) 320px}}@media(max-width:1100px){.sidebar{width:190px;padding:30px 15px}.main{margin-left:190px;width:calc(100% - 190px);padding:0 28px 30px}.brand{font-size:18px}.content{grid-template-columns:1fr}.aside{display:grid;grid-template-columns:1fr 1fr;gap:18px}.guide{margin-top:0}.top-student{padding:23px}.trophy{margin-top:16px}.score{margin-top:16px}}@media(max-width:680px){.sidebar{display:none}.main{margin:0;width:100%;padding:0 18px 25px}.topbar{height:68px}.breadcrumb{display:none}.mobile-brand{display:block;font-weight:700;font-size:17px;color:#294e3e}.profile span{display:none}.heading{margin:27px 0 22px;align-items:flex-start}h1{font-size:26px}.heading .primary{font-size:0;padding:10px}.heading .primary span{font-size:20px}.stats{gap:8px;margin-bottom:20px}.stat{padding:14px 12px}.stat-head{font-size:10px}.stat-icon{display:none}.stat-value{font-size:25px}.stat-foot{font-size:9px;line-height:1.6}.panel-heading{padding:19px 16px}.search-wrap{padding:0 16px 18px}.search-wrap svg{left:29px}th,td{padding:14px 8px}th:first-child,td:first-child{padding-left:16px}.student-cell{gap:7px}.student-avatar{display:none}.student-name{font-size:11px;white-space:normal}.count{margin-left:4px}.table-footer{padding:16px}.aside{grid-template-columns:1fr}.footer{line-height:1.7;gap:15px}.footnote{line-height:1.7}}
+:root{
+  --bg:#f3f5f2; --surface:#ffffff; --surface2:#eef2ee; --ink:#14231d; --muted:#5c6d63; --line:#dde4dd;
+  --primary:#0e4d3c; --primary2:#0a382c; --primary-soft:#e4efe9; --gold:#b8912a; --gold-soft:#fdf6dc;
+  --red:#b42318; --red-soft:#fdecea; --amber:#8a6100; --amber-soft:#fdf0cd;
+  --radius:16px; --shadow:0 1px 3px rgba(14,40,30,.06),0 10px 30px rgba(14,40,30,.05);
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#0f1512;--surface:#1a221e;--surface2:#232e28;--ink:#e8ede9;--muted:#9fb0a5;--line:#2e3a33;--primary:#3db98f;--primary2:#0c2b21;--primary-soft:#1d332a;--gold:#e3b93e;--gold-soft:#332b0e;--red:#f08a80;--red-soft:#3a1f1c;--amber:#e8c15a;--amber-soft:#332b0e;--shadow:0 1px 3px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.3)}
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans","Noto Sans Myanmar",system-ui,sans-serif;line-height:1.6;font-size:15.5px}
+h1,h2,h3,h4{font-family:"Manrope","Noto Sans Myanmar","Noto Sans",sans-serif;line-height:1.25;margin:0;letter-spacing:-.01em}
+button,input,select,textarea{font:inherit;color:inherit} a{color:var(--primary)}
+.wrap{max-width:1140px;margin:0 auto;padding:0 18px 64px}
+/* Header */
+header{background:var(--primary2);color:#eef4ef}
+.hd{max-width:1140px;margin:0 auto;padding:20px 18px;display:flex;flex-wrap:wrap;gap:18px;justify-content:space-between;align-items:flex-start}
+.brand{display:flex;gap:14px;min-width:0}
+.crest{width:50px;height:50px;flex:0 0 50px;border-radius:14px;background:var(--gold);color:#1d1600;display:grid;place-items:center;font-family:Manrope,sans-serif;font-weight:800;font-size:17px}
+.brand h1{font-size:clamp(19px,3.6vw,26px);color:#fff;font-weight:800}
+.brand .my{font-size:clamp(14px,2.8vw,17px);color:#f0d98a;font-weight:600;margin-top:2px}
+.brand .meta{font-size:13px;color:#b9cabe;margin-top:5px}.brand .meta a{color:#f0d98a}
+.hd-actions{display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.pill{display:inline-flex;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:3px;gap:2px}
+.pill button{border:0;background:transparent;color:#eef4ef;padding:7px 14px;border-radius:999px;font-weight:600;font-size:13.5px;cursor:pointer}
+.pill button[aria-pressed="true"]{background:#fff;color:var(--primary2)}
+.pill-label{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#9db8a8;text-align:right;font-weight:700}
+.sample-bar{max-width:1140px;margin:14px auto 0;padding:0 18px}
+.sample-bar div{background:var(--gold-soft);border:1px solid var(--gold);border-radius:12px;padding:10px 14px;font-size:13.5px}
+.sample-bar strong{color:var(--amber)}
+/* Generic */
+.view{display:none}.view.active{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+.card h3{font-size:16.5px;font-weight:800}
+.sub{color:var(--muted);font-size:13.5px}
+.section{margin-top:30px}.section-h{display:flex;flex-wrap:wrap;gap:8px;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+.section-h h2{font-size:21px;font-weight:800}
+.grid{display:grid;gap:14px}.grid.stats{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.grid.grades{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+@media(max-width:520px){.grid.grades{grid-template-columns:1fr 1fr}.grade-card{padding:14px}}
+.stat-n{font-family:Manrope,sans-serif;font-size:30px;font-weight:800;margin:6px 0 2px}
+.stat-l{color:var(--muted);font-size:13px;font-weight:700}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700;white-space:normal;overflow-wrap:anywhere;line-height:1.4}
+.badge.paid,.badge.present{background:var(--primary-soft);color:var(--primary)}
+.badge.unpaid,.badge.absent{background:var(--red-soft);color:var(--red)}
+.badge.pending,.badge.late{background:var(--amber-soft);color:var(--amber)}
+.badge.top{background:var(--gold-soft);color:var(--amber);border:1px solid var(--gold)}
+.badge.info{background:var(--surface2);color:var(--muted)}
+.btn{border:1px solid var(--primary);background:var(--primary);color:#fff;padding:10px 18px;border-radius:11px;font-weight:700;font-size:14px;cursor:pointer;min-height:44px}
+.btn.ghost{background:transparent;color:var(--primary)}.btn.danger{background:transparent;color:var(--red);border-color:var(--red)}
+.btn.small{padding:6px 12px;min-height:36px;font-size:13px;border-radius:9px}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1d1600}
+.ann{padding:15px 0;border-bottom:1px solid var(--line)}.ann:first-child{padding-top:6px}.ann:last-child{border-bottom:0}
+.ann h4{font-size:15.5px;margin-bottom:2px}.ann .when{font-size:12.5px;color:var(--muted);margin-bottom:4px}.ann p{margin:0;font-size:14.5px}
+.grade-card{text-align:left;cursor:pointer;width:100%;font:inherit}
+.grade-card:hover{border-color:var(--primary)}
+.grade-card .gn{font-family:Manrope,sans-serif;font-size:17px;font-weight:800}
+.grade-card .gc{font-family:Manrope,sans-serif;font-size:26px;font-weight:800;margin:4px 0 0}
+.progress{height:10px;background:var(--surface2);border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--primary);border-radius:99px}
+.progress.gold i{background:var(--gold)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl th{text-align:left;font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:9px 10px;border-bottom:2px solid var(--line);white-space:nowrap}
+.tbl td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}.tbl tr:last-child td{border-bottom:0}
+.tbl-wrap{overflow-x:auto}
+@media(max-width:680px){.tbl-stack,.tbl-stack tbody,.tbl-stack tr,.tbl-stack td{display:block;width:100%}.tbl-stack thead{display:none}.tbl-stack tr{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:4px;background:var(--surface)}.tbl-stack td{border-bottom:0;padding:6px 10px;display:flex;justify-content:space-between;gap:12px;text-align:right}.tbl-stack td::before{content:attr(data-th);font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);text-align:left;padding-top:2px}.tbl-stack td.main{display:block;text-align:left}.tbl-stack td.main::before{display:none}}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.controls input[type=search],.controls select,.field input,.field select,.field textarea{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;font-size:14.5px;min-height:44px}
+.controls input[type=search]{flex:1 1 200px}
+.field{display:flex;flex-direction:column;gap:5px}.field label{font-size:13px;font-weight:700;color:var(--muted)}
+.form-grid{display:grid;gap:12px;grid-template-columns:1fr}@media(min-width:640px){.form-grid{grid-template-columns:1fr 1fr}}
+.field.full{grid-column:1/-1}
+.msg{font-size:13.5px;font-weight:600;color:var(--primary);min-height:20px;margin-top:8px}.msg.err{color:var(--red)}
+.tabs{display:flex;flex-wrap:wrap;gap:8px}
+.tabs button{border:1px solid var(--line);background:var(--surface);padding:9px 16px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer}
+.tabs button[aria-selected="true"],.tabs button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.att-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.att-row:last-child{border-bottom:0}
+.att-btns{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.att-btns button{border:0;background:var(--surface);padding:8px 13px;cursor:pointer;font-weight:600;font-size:13px;border-right:1px solid var(--line)}
+.att-btns button:last-child{border-right:0}
+.att-btns button[aria-pressed="true"].p{background:var(--primary);color:#fff}
+.att-btns button[aria-pressed="true"].a{background:var(--red);color:#fff}
+.att-btns button[aria-pressed="true"].l{background:var(--gold);color:#1d1600}
+input.mark-edit{width:64px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.hidden{display:none!important}
+footer{color:var(--muted);font-size:13px;text-align:center;margin-top:40px}
+/* Admin layout */
+.admin-shell{display:grid;gap:18px;margin-top:18px}
+@media(min-width:900px){.admin-shell{grid-template-columns:210px 1fr;align-items:start}.admin-nav{position:sticky;top:14px}}
+.admin-nav{display:flex;flex-wrap:wrap;gap:8px}
+@media(min-width:900px){.admin-nav{flex-direction:column;flex-wrap:nowrap}}
+.admin-nav button{border:1px solid var(--line);background:var(--surface);padding:11px 16px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;text-align:left;box-shadow:var(--shadow)}
+.admin-nav button[aria-selected="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.panel{display:none}.panel.active{display:block}
+.login-wrap{max-width:440px;margin:30px auto 0}
+.demo{background:var(--gold-soft);border:1px dashed var(--gold);border-radius:10px;padding:12px 14px;font-size:13.5px;margin-top:14px}
+.demo code{font-weight:700;background:var(--surface);padding:1px 6px;border-radius:6px;border:1px solid var(--line)}
+.top-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(215px,1fr))}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px;margin-top:8px}.kv dt{color:var(--muted);font-weight:600}.kv dd{margin:0;font-weight:700}
+/* ===== Sidebar layout ===== */
+:root{--sb-w:284px}
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sb-w);background:var(--primary2);color:#eef4ef;display:flex;flex-direction:column;z-index:70;box-shadow:2px 0 18px rgba(10,35,26,.18)}
+.sb-brand{padding:20px 18px 16px;border-bottom:1px solid rgba(255,255,255,.14);display:flex;gap:12px;align-items:flex-start}
+.sb-brand .crest{width:46px;height:46px;flex:0 0 46px;border-radius:12px;background:var(--gold);color:#1d1600;display:grid;place-items:center;font-family:Manrope,sans-serif;font-weight:800;font-size:15px}
+.sb-brand h2{font-size:16.5px;color:#fff;font-weight:800;line-height:1.3}
+.sb-brand .my{font-size:13px;color:#f0d98a;font-weight:600;margin-top:3px;line-height:1.45}
+.sb-brand .meta{font-size:11.5px;color:#9db8a8;margin-top:5px;line-height:1.5}
+.sb-nav{flex:1;overflow-y:auto;padding:14px 12px;-webkit-overflow-scrolling:touch}
+.sb-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9db8a8;font-weight:700;padding:6px 10px 6px}
+.sb-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:transparent;color:#eef4ef;padding:11px 12px;border-radius:10px;font-weight:600;font-size:14.5px;cursor:pointer;margin-bottom:2px;min-height:44px}
+.sb-item:hover{background:rgba(255,255,255,.09)}
+.sb-item.active,.sb-item[aria-selected="true"]{background:var(--gold);color:#1d1600;font-weight:800}
+.sb-item .chev{margin-left:auto;font-size:12px;opacity:.8}
+.sb-grades{display:none;padding:2px 0 6px 14px}
+.sb-grades.open{display:block}
+.sb-grade{display:block;width:100%;text-align:left;border:0;background:transparent;color:#cfe0d4;padding:8px 12px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;min-height:38px}
+.sb-grade:hover{background:rgba(255,255,255,.09);color:#fff}
+.sb-grade.active{background:rgba(255,255,255,.16);color:#f0d98a;font-weight:800}
+.sb-foot{border-top:1px solid rgba(255,255,255,.14);padding:14px 14px 18px;display:flex;flex-direction:column;gap:10px}
+.sb-foot .pill{align-self:flex-start}
+.sb-foot-btn{width:100%;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;padding:11px 14px;border-radius:10px;font-weight:700;font-size:14px;cursor:pointer;min-height:44px;text-align:center}
+.sb-foot-btn:hover{background:rgba(255,255,255,.18)}
+.sb-foot-btn.goldb{background:var(--gold);border-color:var(--gold);color:#1d1600}
+.sb-overlay{display:none}
+.mobile-bar{display:none}
+.content-shift{min-width:0}
+@media(min-width:901px){
+  .content-shift{margin-left:var(--sb-w)}
+  .content-shift header{display:none}
+  .admin-shell{grid-template-columns:1fr!important}
+  .admin-nav{display:none!important}
+}
+@media(max-width:900px){
+  .sidebar{display:none;width:min(84vw,300px)}
+  .sidebar.open{display:flex;animation:sbIn .28s ease}
+  @keyframes sbIn{from{transform:translateX(-105%)}to{transform:translateX(0)}}
+  .sb-overlay{display:block;position:fixed;inset:0;background:rgba(8,20,15,.55);z-index:65;opacity:0;pointer-events:none;transition:opacity .28s ease}
+  .sb-overlay.show{opacity:1;pointer-events:auto}
+  .mobile-bar{display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:50;background:var(--primary2);color:#fff;padding:10px 14px;box-shadow:0 2px 10px rgba(10,35,26,.25)}
+  .mobile-bar .mb-title{font-family:Manrope,sans-serif;font-weight:800;font-size:15.5px;line-height:1.3;min-width:0}
+  .mobile-bar .mb-title small{display:block;color:#f0d98a;font-weight:600;font-size:12px}
+  .hamb{flex:0 0 auto;width:44px;height:44px;border-radius:10px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.12);color:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;line-height:1}
+  .sb-close{margin-left:auto;flex:0 0 auto;width:38px;height:38px;border-radius:9px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.1);color:#fff;font-size:17px;cursor:pointer;display:grid;place-items:center}
+  @media (prefers-reduced-motion:reduce){.sidebar{animation:none}.sb-overlay{transition:none}}
+}
+@media(min-width:901px){.sb-close{display:none}}
+
+/* Page-by-page + Teachers + Photos */
+.page-head{margin-top:22px;margin-bottom:14px}
+.page-head h2{font-size:24px;font-weight:800}
+.page-head p{color:var(--muted);margin:6px 0 0}
+.hero-card{background:var(--primary);color:#fff;border-radius:18px;padding:24px;display:grid;gap:16px}
+@media(min-width:700px){.hero-card{grid-template-columns:1.4fr .9fr}}
+.hero-card h2{color:#fff;font-size:26px}
+.hero-card p{color:#d7e6dc;margin:8px 0 0}
+.quick-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));margin-top:14px}
+.quick-btn{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:left;cursor:pointer;font-weight:800;box-shadow:var(--shadow)}
+.quick-btn span{display:block;font-weight:500;color:var(--muted);font-size:13px;margin-top:4px}
+.avatar{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid var(--gold);background:var(--surface2)}
+.avatar-lg{width:110px;height:110px}
+.avatar-sm{width:52px;height:52px;border-width:2px}
+.teacher-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.teacher-card{text-align:center;padding:22px 18px}
+.teacher-card h3{margin-top:12px;font-size:17px}
+.achiever-card{text-align:center;padding:22px 16px}
+.photo-note{font-size:11.5px;color:var(--muted);margin-top:6px}
+.rank-pill{display:inline-block;background:var(--gold);color:#1d1600;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px}
+.flex-photo{display:flex;gap:14px;align-items:center}
+
+/* Teacher groups (Grade 12 -> KG) */
+.teach-group{margin-top:28px}
+.teach-group-h{display:flex;align-items:center;gap:10px;border-bottom:2px solid var(--primary-soft);padding-bottom:8px;margin-bottom:14px}
+.teach-group-h h3{font-size:19px;font-weight:800}
+/* Announcements — clear notice cards */
+.ann-stack{display:grid;gap:14px}
+.ann-card{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;text-align:left}
+.ann-card.is-important{border-color:var(--gold);background:color-mix(in srgb,var(--gold-soft) 42%,var(--surface));box-shadow:0 2px 10px rgba(140,100,10,.12)}
+.ann-top{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cat-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:999px;font-size:12.5px;font-weight:800;border:1px solid transparent}
+.cat-badge svg{width:15px;height:15px;flex:0 0 15px}
+.cat-fees{background:var(--gold-soft);color:var(--amber);border-color:var(--gold)}
+.cat-exam{background:var(--primary-soft);color:var(--primary)}
+.cat-holiday{background:var(--red-soft);color:var(--red)}
+.cat-event{background:#ece7fa;color:#5b3fae}
+.cat-meeting{background:#e2eefb;color:#175c9e}
+.cat-general{background:var(--surface2);color:var(--muted)}
+@media (prefers-color-scheme:dark){.cat-event{background:#2e2650;color:#c4b5f5}.cat-meeting{background:#1d3350;color:#9ec7f5}}
+.pill-imp{display:inline-flex;align-items:center;gap:5px;background:var(--red);color:#fff;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:800}
+.pill-new{display:inline-flex;background:var(--primary);color:#fff;padding:4px 11px;border-radius:999px;font-size:12px;font-weight:800}
+.ann-date{margin-left:auto;font-family:Manrope,sans-serif;font-weight:800;font-size:13.5px;background:var(--surface2);border:1px solid var(--line);padding:4px 11px;border-radius:999px;white-space:nowrap}
+.ann-card.is-important .ann-date{background:var(--surface)}
+.ann-title{font-size:19px;font-weight:800;margin-top:10px;line-height:1.35}
+.ann-summary{font-size:15px;font-weight:600;margin-top:4px}
+.ann-keys{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));margin-top:12px}
+.ann-key{background:var(--surface2);border-radius:10px;padding:9px 12px}
+.ann-card.is-important .ann-key{background:var(--surface)}
+.ann-key span{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.ann-key strong{display:block;font-size:13.5px;margin-top:2px;line-height:1.5}
+.ann-body{font-size:14.5px;color:var(--muted);margin-top:12px}
+.ann-card{color:var(--ink)}
+.hero-card .ann-card .ann-summary{color:var(--ink)}
+.hero-card .ann-card .ann-body{color:var(--muted)}
+.hero-card .ann-card .ann-title{color:var(--ink)}
+.hero-card .ann-card{border-color:var(--line)}
+/* Exam-tagged marks */
+.exam-tag{display:inline-flex;align-items:center;gap:7px;background:var(--primary);color:#fff;font-weight:800;font-size:13.5px;padding:7px 14px;border-radius:999px;line-height:1.3}
+.exam-tag.gold{background:var(--gold);color:#1d1600}
+.exam-tag svg{width:16px;height:16px;flex:0 0 16px}
+.exam-chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.exam-chips button{border:1.5px solid var(--line);background:var(--surface);padding:8px 14px;border-radius:999px;font-weight:700;font-size:13.5px;cursor:pointer;min-height:40px}
+.exam-chips button[aria-pressed="true"]{background:var(--primary);border-color:var(--primary);color:#fff}
+.exam-chips button:hover{border-color:var(--primary)}
+.marks-head-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px}
+.head-teacher-card{display:flex;gap:16px;align-items:center;background:var(--gold-soft);border:1.5px solid var(--gold);border-radius:14px;padding:16px;margin-top:16px;flex-wrap:wrap}
+.head-teacher-card .avatar{width:76px;height:76px}
+.head-badge{display:inline-block;background:var(--gold);color:#1d1600;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px}
+.assign-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.assign-row:last-child{border-bottom:0}
+.assign-row select{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 10px;min-height:42px;flex:1 1 200px}
+
 </style>
 </head>
 <body>
-<div class="app">
-<aside class="sidebar">
- <div class="brand"><div class="logo">▤</div>student<span style="color:#819171;margin-left:-10px">desk.</span></div>
- <div class="section-label">WORKSPACE</div>
- <button class="nav active" id="nav-all"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Overview</button>
- <button class="nav" id="nav-search"><svg viewBox="0 0 24 24"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg>Find a student</button>
- <div class="sidebar-bottom"><span class="status-dot"></span> Your classroom, organized.<br><strong>Student management system</strong><br>Local session · v1.0</div>
+<aside class="sidebar" id="sidebar" aria-label="Main navigation">
+  <div class="sb-brand">
+    <div class="crest" aria-hidden="true">SPS</div>
+    <div style="min-width:0;flex:1">
+      <h2 id="sbSchoolName">Shwe Pyi Soe Private High School</h2>
+      <div class="my" id="sbSchoolName2">ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း</div>
+      <div class="meta">South Dagon Township, Yangon · <a href="tel:+959252574483" style="color:#f0d98a">+95 9 252 574 483</a></div>
+    </div>
+    <button type="button" class="sb-close" id="sbClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="sb-nav">
+    <div id="sbPublicNav">
+      <div class="sb-label" data-i18n="portal">Portal</div>
+      <button type="button" class="sb-item active" data-sbnav="home"><span data-i18n="sbHome">Home</span></button>
+      <button type="button" class="sb-item" data-sbnav="ann"><span data-i18n="annHead">Announcements</span></button>
+      <button type="button" class="sb-item" data-sbnav="grades"><span data-i18n="sbGrades">Grades</span></button>
+      <button type="button" class="sb-item" data-sbnav="teachers"><span data-i18n="teachersHead">Teachers</span></button>
+      <button type="button" class="sb-item" data-sbnav="top"><span data-i18n="topHead">Top achievers</span></button>
+      <button type="button" class="sb-item" data-sbnav="overview"><span data-i18n="overviewHead">School overview</span></button>
+    </div>
+    <div id="sbAdminNav" class="hidden">
+      <div class="sb-label" data-i18n="sbAdminMenu">Admin menu</div>
+      <button type="button" class="sb-item" data-atab="overview" aria-selected="true"><span data-i18n="navOverview">Overview</span></button>
+      <button type="button" class="sb-item" data-atab="students" aria-selected="false"><span data-i18n="navStudents">Students</span></button>
+      <button type="button" class="sb-item" data-atab="attendance" aria-selected="false"><span data-i18n="navAttendance">Attendance</span></button>
+      <button type="button" class="sb-item" data-atab="marks" aria-selected="false"><span data-i18n="navMarks">Marks</span></button>
+      <button type="button" class="sb-item" data-atab="fees" aria-selected="false"><span data-i18n="navFees">School Fees</span></button>
+      <button type="button" class="sb-item" data-atab="teachers" aria-selected="false"><span data-i18n="teachersHead">Teachers</span></button>
+      <button type="button" class="sb-item" data-atab="announce" aria-selected="false"><span data-i18n="navAnnounce">Announcements</span></button>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <div>
+      <div class="pill-label" style="text-align:left" data-i18n="language">Language</div>
+      <div class="pill" role="group" aria-label="Language"><button type="button" id="langEn2" aria-pressed="true">English</button><button type="button" id="langMy2" aria-pressed="false">မြန်မာ</button></div>
+    </div>
+    <button type="button" class="sb-foot-btn goldb" id="sbAdminBtn"><span data-i18n="adminBtn">Admin Login</span></button>
+    <button type="button" class="sb-foot-btn hidden" id="sbPublicBtn"><span data-i18n="backPublic">← Back to public portal</span></button>
+    <button type="button" class="sb-foot-btn hidden" id="sbLogoutBtn"><span data-i18n="logoutBtn">Log out</span></button>
+  </div>
 </aside>
-<main class="main">
- <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong>Overview</strong></div><div class="mobile-brand">studentdesk.</div><div class="profile"><span>Class administrator</span><div class="avatar">AD</div></div></header>
- <section class="heading"><div><p class="eyebrow">A LITTLE CLARITY FOR YOUR CLASSROOM</p><h1>Student overview</h1><p class="subtitle">All your students. One simple space.</p></div><button class="primary" id="add"><span>＋</span> Add student</button></section>
- <section class="stats" aria-label="Class statistics">
-  <div class="stat"><div class="stat-head">Total students <span class="stat-icon">♧</span></div><div class="stat-value" id="total">0</div><div class="stat-foot"><span id="slots">4 places available</span> in this class</div></div>
-  <div class="stat"><div class="stat-head">Average mark <span class="stat-icon">↗</span></div><div class="stat-value" id="average">—</div><div class="stat-foot">Class performance <span>out of 100</span></div></div>
-  <div class="stat"><div class="stat-head">Pass rate <span class="stat-icon">✓</span></div><div class="stat-value" id="pass">—</div><div class="stat-foot"><span id="passed">No results yet</span></div></div>
- </section>
- <div class="content">
-  <section class="panel"><div class="panel-heading"><h2>Student directory <span class="count" id="count">0 students</span></h2><span style="font-size:10px;color:#9aa393">CLASS OF 4</span></div><div class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><input class="search" id="search" type="search" placeholder="Search by student ID…" aria-label="Search by student ID"></div>
-  <table><thead><tr><th scope="col">STUDENT</th><th scope="col">AGE</th><th scope="col">MARK</th><th scope="col">GRADE</th></tr></thead><tbody id="students"></tbody></table>
-  <div class="table-footer"><span id="showing">Showing 0 students</span><span>Student records</span></div></section>
-  <aside class="aside"><section class="panel top-student"><div class="top-label">✧ &nbsp; TOP PERFORMER</div><div class="trophy">♜</div><h3 id="top-name">Your next bright mind</h3><div class="top-id" id="top-id">Add a student to get started</div><div class="score"><span id="top-score">—</span> <small>/ 100</small></div><div class="progress"><div id="top-progress" style="width:0%"></div></div><p class="top-note" id="top-note">The highest scoring student will appear here.</p></section>
-  <section class="panel guide"><h2>A guide to grades</h2><div class="guide-row"><span class="grade">Grade A</span><span>80–100 marks</span></div><div class="guide-row"><span class="grade B">Grade B</span><span>60–79 marks</span></div><div class="guide-row"><span class="grade C">Grade C</span><span>40–59 marks</span></div><div class="guide-row"><span class="grade D">Grade D</span><span>Below 40 · Fail</span></div><div class="footnote">ⓘ &nbsp; A mark of 40 or above is a pass.</div></section></aside>
- </div>
- <footer class="footer"><span>Made for a more organized classroom.</span><span>Session only · Records clear when you reload</span></footer>
-</main></div>
-<dialog class="dialog" id="dialog"><form id="form"><div class="dialog-top"><h2>Add a student</h2><button type="button" class="close" id="close" aria-label="Close dialog">×</button></div><p>A new face, a new possibility. Enter their details below.</p><label class="field">Full name<input id="name" name="name" placeholder="e.g. Lin Htet Aung" maxlength="100" required autocomplete="off"></label><label class="field">Student ID<input id="id" name="studentId" placeholder="e.g. 111001" maxlength="40" pattern="\S+" title="Use an ID without spaces" required autocomplete="off"></label><div class="form-row"><label class="field">Age<input id="age" name="age" type="number" min="1" max="120" step="1" placeholder="20" required></label><label class="field">Mark / 100<input id="mark" name="mark" type="number" min="0" max="100" step="0.01" placeholder="85" required></label></div><div id="error" class="error" role="alert"></div><div class="form-actions"><button class="primary" type="submit">Add student <span>↗</span></button></div></form></dialog>
+<div class="sb-overlay" id="sbOverlay"></div>
+<div class="content-shift">
+<div class="mobile-bar"><button type="button" class="hamb" id="hambBtn" aria-label="Open menu" aria-expanded="false">☰</button><div class="mb-title">Shwe Pyi Soe Private High School<small>ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း</small></div></div>
+<header>
+  <div class="hd">
+    <div class="brand">
+      <div class="crest" aria-hidden="true">SPS</div>
+      <div>
+        <h1 id="schoolName">Shwe Pyi Soe Private High School</h1>
+        <div class="my" id="schoolName2">ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း</div>
+        <div class="meta"><span data-i18n="address">No.18, Si Thu St., corner of Pearl Kan St., Ward 65, South Dagon Township, Yangon</span> · <a href="tel:+959252574483">+95 9 252 574 483</a> · <a href="https://www.facebook.com/profile.php?id=100063652883524" target="_blank" rel="noopener">Facebook</a></div>
+      </div>
+    </div>
+    <div class="hd-actions">
+      <div><div class="pill-label" data-i18n="language">Language</div><div class="pill" role="group" aria-label="Language"><button type="button" id="langEn" aria-pressed="true">English</button><button type="button" id="langMy" aria-pressed="false">မြန်မာ</button></div></div>
+      <div><div class="pill-label" data-i18n="portal">Portal</div><div class="pill" role="group" aria-label="Portal"><button type="button" id="publicBtn" aria-pressed="true" data-i18n="publicBtn">Student &amp; Parent</button><button type="button" id="adminBtn" aria-pressed="false" data-i18n="adminBtn">Admin Login</button><button type="button" id="logoutBtn" class="hidden" data-i18n="logoutBtn">Log out</button></div></div>
+    </div>
+  </div>
+</header>
+<div class="sample-bar"><div><strong data-i18n="sampleTag">Sample Data</strong> · <span data-i18n="sampleText">Prototype with example students only. Every number on this page is calculated from the sample roster shown in the app. Changes last only while this page is open.</span></div></div>
+
+<main class="wrap">
+
+<!-- ============ HOME PAGE ============ -->
+<section class="view active" id="view-home">
+  <div class="hero-card" style="margin-top:20px">
+    <div><h2 data-i18n="welcomeH">Welcome to Shwe Pyi Soe</h2><p data-i18n="welcomeP">For students & parents — no login needed. Check announcements, grades, teachers, timetables, marks and top achievers, page by page from the sidebar.</p>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap"><button type="button" class="btn gold" data-goto="announcements" data-i18n="annHead">Announcements</button><button type="button" class="btn ghost" style="color:#fff;border-color:#fff" data-goto="grades" data-i18n="gradesHead">Explore by grade</button></div></div>
+    <div class="card" style="color:var(--ink)"><h3 data-i18n="latestAnn">Latest announcement</h3><div id="homeLatestAnn" style="margin-top:8px"></div></div>
+  </div>
+  <div class="grid stats" id="homeStats" style="margin-top:16px"></div>
+  <div class="section"><div class="section-h"><h2 data-i18n="quickH">Quick pages</h2></div>
+  <div class="quick-grid">
+    <button type="button" class="quick-btn" data-goto="announcements"><span data-i18n="annHead">Announcements</span></button>
+    <button type="button" class="quick-btn" data-goto="grades"><span data-i18n="sbGrades">Grades</span></button>
+    <button type="button" class="quick-btn" data-goto="teachers"><span data-i18n="teachersHead">Teachers</span></button>
+    <button type="button" class="quick-btn" data-goto="top"><span data-i18n="topHead">Top achievers</span></button>
+    <button type="button" class="quick-btn" data-goto="overview"><span data-i18n="overviewHead">School overview</span></button>
+  </div></div>
+  <div class="section"><div class="section-h"><h2 data-i18n="homeTopH">Top achiever highlights</h2><span class="exam-tag gold" data-exam-tag></span><button type="button" class="btn ghost small" data-goto="top" data-i18n="seeAll">See all →</button></div><div class="top-grid" id="homeTop"></div><p class="photo-note" data-i18n="photoNote">Sample photos — real photos will be uploaded by admin in Phase 2.</p></div>
+  <div class="section"><div class="section-h"><h2 data-i18n="homeTeachH">Meet our teachers</h2><button type="button" class="btn ghost small" data-goto="teachers" data-i18n="seeAll">See all →</button></div><div class="teacher-grid" id="homeTeachers"></div></div>
+</section>
+
+<!-- ============ ANNOUNCEMENTS PAGE ============ -->
+<section class="view" id="view-announcements">
+  <div class="page-head"><h2 data-i18n="annHead">Announcements</h2><p data-i18n="annSub">From the school office · for all students & parents</p></div>
+  <div class="card"><div id="publicAnn"></div></div>
+</section>
+
+<!-- ============ GRADES LIST PAGE ============ -->
+<section class="view" id="view-grades">
+  <div class="page-head"><h2 data-i18n="gradesHead">Explore by grade</h2><p data-i18n="gradesSub">KG to Grade 12 · tap a grade for classes, timetable, marks & attendance</p></div>
+  <div class="grid grades" id="gradeGrid"></div>
+</section>
+
+<!-- ============ TEACHERS PAGE ============ -->
+<section class="view" id="view-teachers">
+  <div class="page-head"><h2 data-i18n="teachersHead">Teachers</h2><p data-i18n="teachersSub">Teacher profiles — subject, class, qualification & experience. View only for students & parents.</p></div>
+  <div class="controls"><select id="teachFilter" aria-label="Subject filter"><option value="">All subjects</option></select></div>
+  <div id="publicTeachers"></div>
+  <p class="photo-note" data-i18n="photoNote">Sample photos — real photos will be uploaded by admin in Phase 2.</p>
+</section>
+
+<!-- ============ TOP ACHIEVERS PAGE ============ -->
+<section class="view" id="view-top">
+  <div class="page-head"><h2 data-i18n="topHead">Top achievers</h2><p data-i18n="topSub">Highest total in each class for the selected exam</p></div>
+  <div class="marks-head-bar"><span class="exam-tag" data-exam-tag></span><span class="sub" data-i18n="examMarksW">Exam Marks</span></div>
+  <p class="sub" data-school-year style="font-weight:700;margin:4px 0">School Year: June – February · Exams: July · October · December · February</p>
+  <div class="exam-chips" data-exam-chips role="group" aria-label="Choose exam"></div>
+  <div class="top-grid" id="publicTop"></div>
+  <p class="photo-note" data-i18n="photoNote">Sample photos — real photos will be uploaded by admin in Phase 2.</p>
+</section>
+
+<!-- ============ OVERVIEW PAGE ============ -->
+<section class="view" id="view-overview">
+  <div class="page-head"><h2 data-i18n="overviewHead">School overview</h2><p data-i18n="overviewSub">Calculated from the sample roster in this prototype</p></div>
+  <div class="grid stats" id="publicStats"></div>
+  <div class="card" style="margin-top:16px"><h3>Shwe Pyi Soe Private High School</h3><p class="sub" style="margin-top:8px">No.18, Si Thu St., corner of Pearl Kan St., Ward 65, South Dagon Township, Yangon · +95 9 252 574 483</p><dl class="kv"><dt>Grades</dt><dd>KG — Grade 12</dd><dt>Classes</dt><dd id="ovClasses">—</dd><dt>Teachers</dt><dd id="ovTeachers">—</dd><dt data-i18n="schoolYearW">School Year: June – February</dt><dd data-school-year>School Year: June – February · Exams: July · October · December · February</dd><dt data-i18n="examMarksW">Exam Marks</dt><dd><span class="exam-tag" data-exam-tag></span></dd></dl><div class="exam-chips" data-exam-chips role="group" aria-label="Choose exam"></div></div>
+</section>
+
+<!-- ============ PUBLIC GRADE DETAIL ============ -->
+<section class="view" id="view-grade">
+  <div style="margin-top:20px"><button type="button" class="btn ghost small" id="gdBack" data-i18n="backHome">← Back to home</button></div>
+  <div class="section-h" style="margin-top:16px"><h2 id="gdTitle">Grade</h2><span class="sub" id="gdSub"></span></div>
+  <div class="grid stats" id="gdStats"></div>
+  <div class="tabs" id="gdClassTabs" style="margin-top:18px" role="tablist" aria-label="Classes"></div>
+  <div id="gdHeadTeacher"></div>
+  <div class="card" style="margin-top:16px;padding:16px 18px"><div class="marks-head-bar"><strong data-i18n="examMarksW">Exam Marks</strong><span class="exam-tag" data-exam-tag></span></div><p class="sub" data-school-year style="font-weight:700">School Year: June – February · Exams: July · October · December · February</p><div class="sub">Choose an exam — marks, totals, rank and top student update for that exam.</div><div class="exam-chips" data-exam-chips role="group" aria-label="Choose exam"></div></div>
+  <div id="gdBody"></div>
+  <div class="card" style="margin-top:16px">
+    <h3 id="gdTtH">Timetable</h3><div class="sub" data-i18n="ttSub">Monday to Friday · 8:00 AM – 3:30 PM</div>
+    <div class="tbl-wrap" style="margin-top:10px"><table class="tbl"><thead><tr id="gdTtHead"></tr></thead><tbody id="gdTtRows"></tbody></table></div>
+  </div>
+</section>
+
+<!-- ============ LOGIN ============ -->
+<section class="view" id="view-login">
+  <div class="login-wrap"><div class="card">
+    <h2 style="font-size:21px" data-i18n="loginTitle">Admin Login</h2>
+    <p class="sub" style="margin-top:6px" data-i18n="loginSub">Staff only. Students and parents never need a login — the public portal above is open to everyone.</p>
+    <form id="loginForm" style="margin-top:16px">
+      <div class="field" style="margin-bottom:12px"><label for="loginUser" data-i18n="loginUser">Username or email</label><input id="loginUser" autocomplete="username" placeholder="admin · admin@shwepyisoe.edu.mm"/></div>
+      <div class="field" style="margin-bottom:14px"><label for="loginPass" data-i18n="loginPass">Password</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="••••••••"/></div>
+      <button type="submit" class="btn" style="width:100%" data-i18n="loginSubmit">Log in to Admin</button>
+      <div class="msg err" id="loginError" role="alert"></div>
+    </form>
+    <div class="demo"><strong data-i18n="demoTag">Demo login (prototype only)</strong><br/><span data-i18n="demoUser">Username</span>: <code>admin</code> · <span data-i18n="demoEmail">Email</span>: <code>admin@shwepyisoe.edu.mm</code><br/><span data-i18n="demoPass">Password</span>: <code>admin123</code></div>
+    <button type="button" class="btn ghost small" id="loginBack" style="margin-top:14px" data-i18n="backPublic">← Back to public portal</button>
+  </div></div>
+</section>
+
+<!-- ============ ADMIN ============ -->
+<section class="view" id="view-admin">
+  <div class="admin-shell">
+    <nav class="admin-nav" aria-label="Admin">
+      <button type="button" data-atab="overview" aria-selected="true" data-i18n="navOverview">Overview</button>
+      <button type="button" data-atab="students" aria-selected="false" data-i18n="navStudents">Students</button>
+      <button type="button" data-atab="attendance" aria-selected="false" data-i18n="navAttendance">Attendance</button>
+      <button type="button" data-atab="marks" aria-selected="false" data-i18n="navMarks">Marks</button>
+      <button type="button" data-atab="fees" aria-selected="false" data-i18n="navFees">School Fees</button>
+      <button type="button" data-atab="teachers" aria-selected="false" data-i18n="teachersHead">Teachers</button>
+      <button type="button" data-atab="announce" aria-selected="false" data-i18n="navAnnounce">Announcements</button>
+    </nav>
+    <div>
+      <div class="panel active" id="ap-overview">
+        <div class="grid stats" id="adminKpis"></div>
+        <div class="grid" style="grid-template-columns:1fr;margin-top:14px">
+          <div class="card"><h3 data-i18n="feeProgH">Fee collection · November</h3><div class="sub" id="feeProgSub"></div><div class="progress" style="margin-top:12px"><i id="feeProgBar" style="width:0%"></i></div><dl class="kv" id="feeProgKv"></dl></div>
+        </div>
+        <div class="section-h" style="margin-top:22px"><h2 style="font-size:18px" data-i18n="topEveryH">Top student · every grade &amp; class</h2></div>
+        <div class="top-grid" id="adminTop"></div>
+      </div>
+
+      <div class="panel" id="ap-students"><div class="card">
+        <div class="controls"><input type="search" id="stuSearch" data-i18n-ph="searchPh" placeholder="Search name, ID, parent or phone…"/><select id="stuGradeF" aria-label="Grade"></select><select id="stuClassF" aria-label="Class"><option value="">All classes</option><option>A</option><option>B</option></select><button type="button" class="btn" id="stuAddToggle" data-i18n="addStudent">+ Add student</button></div>
+        <form id="stuForm" class="hidden" style="margin-bottom:16px"><input type="hidden" id="fId"/>
+          <div class="form-grid">
+            <div class="field"><label for="fNameEn" data-i18n="fNameEn">Name (English)</label><input id="fNameEn" required/></div>
+            <div class="field"><label for="fNameMy" data-i18n="fNameMy">Name (Burmese)</label><input id="fNameMy"/></div>
+            <div class="field"><label for="fGrade" data-i18n="fGrade">Grade</label><select id="fGrade"></select></div>
+            <div class="field"><label for="fSection" data-i18n="fSection">Class / section</label><select id="fSection"><option>A</option><option>B</option></select></div>
+            <div class="field"><label for="fAge" data-i18n="fAge">Age</label><input id="fAge" type="number" min="4" max="20" value="11"/></div>
+            <div class="field"><label for="fParent" data-i18n="fParent">Parent / guardian name</label><input id="fParent"/></div>
+            <div class="field"><label for="fPhone" data-i18n="fPhone">Parent phone</label><input id="fPhone" inputmode="tel" placeholder="09…"/></div>
+            <div class="field"><label for="fFee" data-i18n="fFeeStatus">Fee status</label><select id="fFee"><option value="paid">Paid</option><option value="unpaid">Unpaid</option><option value="pending">Partial</option></select></div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn" data-i18n="saveStudent">Save student</button><button type="button" class="btn ghost" id="stuCancel" data-i18n="cancel">Cancel</button></div>
+          <div class="msg" id="stuMsg" role="status"></div>
+        </form>
+        <div class="sub" id="stuCount" style="margin-bottom:8px"></div>
+        <div id="stuTable"></div>
+      </div></div>
+
+      <div class="panel" id="ap-attendance"><div class="card">
+        <div class="controls"><strong id="attDate"></strong><select id="attClass" aria-label="Class"></select><span class="sub" id="attSummary"></span></div>
+        <div id="attList"></div>
+        <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap;align-items:center"><button type="button" class="btn" id="attAll" data-i18n="markAll">Mark all present</button><span class="msg" id="attMsg" role="status"></span></div>
+      </div></div>
+
+      <div class="panel" id="ap-marks"><div class="card">
+        <div class="marks-head-bar"><strong>Marks — enter per exam</strong><span class="exam-tag" data-exam-tag></span></div>
+        <p class="sub" data-school-year style="font-weight:700">School Year: June – February · Exams: July · October · December · February</p>
+        <p class="sub">You are editing marks for the exam shown in the gold/green tag. Switch exam below — each exam keeps its own marks.</p>
+        <div class="exam-chips" data-exam-chips role="group" aria-label="Choose exam"></div>
+        <div class="controls"><select id="marksClass" aria-label="Class"></select><select id="marksExam" class="hidden" aria-hidden="true" tabindex="-1"><option value="dec">December Exam</option></select><span class="sub" data-i18n="marksHint">Tap a mark to edit — total &amp; rank update automatically.</span></div>
+        <div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr id="marksHead"></tr></thead><tbody id="marksRows"></tbody></table></div>
+      </div></div>
+
+      <div class="panel" id="ap-fees"><div class="card">
+        <div class="controls"><strong data-i18n="feesTitle">November tuition · Grade 12 down to KG</strong><span class="sub" id="feesSummary"></span></div>
+        <p class="sub" data-i18n="feesSub">Paid, unpaid and partial, with the amount still left to collect in each grade.</p>
+        <div id="feeGroups" style="margin-top:8px"></div>
+      </div></div>
+
+      <div class="panel" id="ap-teachers"><div class="card">
+        <div class="controls"><strong data-i18n="teachersHead">Teachers</strong><span class="sub">Admin only — add, edit or delete teacher profiles. Changes appear on the public Teachers page.</span><button type="button" class="btn" id="teachAddToggle">+ Add teacher</button></div>
+        <form id="teachForm" class="hidden" style="margin-bottom:16px"><input type="hidden" id="tfId"/>
+          <div class="form-grid">
+            <div class="field"><label for="tfNameEn">Name (English)</label><input id="tfNameEn" required/></div>
+            <div class="field"><label for="tfNameMy">Name (Burmese)</label><input id="tfNameMy"/></div>
+            <div class="field"><label for="tfSubject">Subject</label><select id="tfSubject"></select></div>
+            <div class="field"><label for="tfGrade">Grade / Class</label><input id="tfGrade" placeholder="Grade 5-A"/></div>
+            <div class="field"><label for="tfQual">Qualification</label><input id="tfQual" placeholder="B.Sc, B.Ed"/></div>
+            <div class="field"><label for="tfExp">Experience (years)</label><input id="tfExp" type="number" min="0" max="40" value="5"/></div>
+            <div class="field full"><label for="tfPhoto">Photo URL (sample portrait)</label><input id="tfPhoto" placeholder="https://randomuser.me/api/portraits/women/44.jpg"/></div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button type="submit" class="btn">Save teacher</button><button type="button" class="btn ghost" id="teachCancel">Cancel</button></div><div class="msg" id="teachMsg"></div>
+        </form>
+        <div id="adminTeachers"></div>
+        <div style="margin-top:22px"><h3 data-i18n="assignHeadH">Assign Class Head Teachers</h3><p class="sub" data-i18n="assignHeadSub">Choose who is in charge of each class.</p><div id="headAssignList" style="margin-top:10px"></div><div class="msg" id="headMsg" role="status"></div></div>
+      </div></div>
+      <div class="panel" id="ap-announce">
+        <div class="grid" style="grid-template-columns:1fr;gap:14px">
+          <div class="card"><h3 data-i18n="newAnn">New announcement</h3><div class="sub" data-i18n="newAnnSub">Appears on the public home page straight away.</div>
+            <form id="annForm" style="margin-top:12px">
+              <div class="form-grid">
+              <div class="field"><label for="annTE" data-i18n="annTE">Title (English)</label><input id="annTE" required/></div>
+              <div class="field"><label for="annTM" data-i18n="annTM">Title (Burmese)</label><input id="annTM"/></div>
+              <div class="field"><label for="annCat" data-i18n="annCatL">Category</label><select id="annCat"></select></div>
+              <div class="field"><label for="annDate" data-i18n="annDateL">Date</label><input id="annDate" type="date" value="2026-11-01"/></div>
+              <div class="field"><label for="annTarget" data-i18n="annTargetL">For which grades</label><select id="annTarget"></select></div>
+              <div class="field"><label for="annImportant" data-i18n="annImpL">Mark as important</label><select id="annImportant"><option value="no">No</option><option value="yes">Yes — pin at the top</option></select></div>
+              <div class="field full"><label for="annSum" data-i18n="annSumL">Summary line (short — shown first)</label><input id="annSum" placeholder="e.g. November tuition is due — pay by 10 November."/></div>
+              <div class="field full"><label for="annAction" data-i18n="annActionL">What parents / students need to do or bring</label><input id="annAction" placeholder="e.g. Pay via KBZPay, WavePay or cash at the office — keep your receipt."/></div>
+              <div class="field full"><label for="annB" data-i18n="annB">Message</label><textarea id="annB" rows="3" required></textarea></div>
+              </div>
+              <button type="submit" class="btn" style="margin-top:12px" data-i18n="postAnn">Post announcement</button><div class="msg" id="annMsg" role="status"></div>
+            </form>
+          </div>
+          <div class="card"><h3 data-i18n="allAnn">All announcements</h3><div id="adminAnn"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer><span data-i18n="footer">Shwe Pyi Soe Private High School · South Dagon, Yangon · Prototype — sample data only</span></footer>
+</main>
+</div><!-- /content-shift -->
+
 <script>
-'use strict';
-const records=[];
-const el=id=>document.getElementById(id);
-const grade=mark=>mark>=80?'A':mark>=60?'B':mark>=40?'C':'D';
-const format=n=>Number.isInteger(n)?String(n):n.toFixed(1);
-function cell(text,className){const td=document.createElement('td');td.textContent=text;if(className)td.className=className;return td;}
-function render(){
- const query=el('search').value.trim().toLowerCase();
- const filtered=records.filter(s=>s.id.toLowerCase().includes(query));
- el('students').replaceChildren();
- for(const s of filtered){
-  const tr=document.createElement('tr');const td=document.createElement('td');const wrap=document.createElement('div');wrap.className='student-cell';const avatar=document.createElement('div');avatar.className='student-avatar';avatar.textContent=s.name.split(/\s+/).slice(0,2).map(n=>n[0]).join('').toUpperCase();const info=document.createElement('div');const name=document.createElement('div');name.className='student-name';name.textContent=s.name;const id=document.createElement('div');id.className='student-id';id.textContent=s.id;info.append(name,id);wrap.append(avatar,info);td.append(wrap);const g=grade(s.mark);const gc=document.createElement('td');const badge=document.createElement('span');badge.className='grade '+g;badge.textContent='Grade '+g;gc.append(badge);tr.append(td,cell(s.age),cell(format(s.mark),'mark'),gc);el('students').append(tr);
- }
- if(!filtered.length){const tr=document.createElement('tr');const td=document.createElement('td');td.colSpan=4;td.className='empty';const title=document.createElement('strong');title.textContent=records.length?'No student found':'A fresh start for your class';const detail=document.createElement('span');detail.textContent=records.length?'Try a different student ID.':'Add your first student to bring this space to life.';td.append(title,detail);tr.append(td);el('students').append(tr);}
- const count=records.length;el('total').textContent=count;el('count').textContent=count+' student'+(count===1?'':'s');el('slots').textContent=(4-count)+' place'+(count===3?'':'s')+' available';el('showing').textContent='Showing '+filtered.length+' of '+count+' students';el('add').disabled=count>=4;el('add').title=count>=4?'This class has reached its limit of 4 students':'';
- const passed=records.filter(s=>s.mark>=40).length;el('average').textContent=count?format(records.reduce((sum,s)=>sum+s.mark,0)/count):'—';el('pass').textContent=count?Math.round(passed/count*100)+'%':'—';el('passed').textContent=count?passed+' of '+count+' students passing':'No results yet';
- if(count){const top=records.reduce((best,s)=>s.mark>best.mark?s:best);el('top-name').textContent=top.name;el('top-id').textContent='Student ID · '+top.id;el('top-score').textContent=format(top.mark);el('top-progress').style.width=top.mark+'%';const ties=records.filter(s=>s.mark===top.mark).length;el('top-note').textContent=ties>1?'Joint highest mark · '+ties+' students':'Leading the class · Grade '+grade(top.mark);}
+"use strict";
+/* ---------- i18n ---------- */
+var I = {
+en:{address:"No.18, Si Thu St., corner of Pearl Kan St., Ward 65, South Dagon Township, Yangon",language:"Language",portal:"Portal",sbHome:"Home",sbGrades:"Grades",sbAdminMenu:"Admin menu",publicBtn:"Student & Parent",adminBtn:"Admin Login",logoutBtn:"Log out",sampleTag:"Sample Data",sampleText:"Prototype with example students only. Every number on this page is calculated from the sample roster shown in the app. Changes last only while this page is open.",annHead:"Announcements",annSub:"From the school office · for all students & parents",gradesHead:"Explore by grade",gradesSub:"KG to Grade 12 · tap a grade for classes, timetable, marks & attendance",topHead:"Top achievers",topSub:"Highest total in each class for the selected exam · sorted Grade 12 down to KG",overviewHead:"School overview",overviewSub:"Calculated from the sample roster in this prototype",backHome:"← Back to home",ttSub:"Monday to Friday · 8:00 AM – 3:30 PM",loginTitle:"Admin Login",loginSub:"Staff only. Students and parents never need a login — the public portal above is open to everyone.",loginUser:"Username or email",loginPass:"Password",loginSubmit:"Log in to Admin",loginError:"Wrong username/email or password. Try again.",backPublic:"← Back to public portal",navOverview:"Overview",navStudents:"Students",navAttendance:"Attendance",navMarks:"Marks",navFees:"School Fees",navAnnounce:"Announcements",feeProgH:"Fee collection · November",topEveryH:"Top student · every grade & class",searchPh:"Search name, ID, parent or phone…",addStudent:"+ Add student",fNameEn:"Name (English)",fNameMy:"Name (Burmese)",fGrade:"Grade",fSection:"Class / section",fAge:"Age",fParent:"Parent / guardian name",fPhone:"Parent phone",fFeeStatus:"Fee status",saveStudent:"Save student",cancel:"Cancel",markAll:"Mark all present",examMid:"December Exam",examMonth:"October Exam",marksHint:"Tap a mark to edit — total & rank update automatically.",feesTitle:"November tuition · Grade 12 down to KG",feesSub:"Paid, unpaid and partial, with the amount still left to collect in each grade.",newAnn:"New announcement",newAnnSub:"Appears on the public home page straight away.",annTE:"Title (English)",annTM:"Title (Burmese)",annB:"Details (full message)",postAnn:"Post announcement",allAnn:"All announcements",footer:"Shwe Pyi Soe Private High School · South Dagon, Yangon · Prototype — sample data only",
+cStudent:"Student",cClass:"Class",cParent:"Parent",cPhone:"Phone",cAge:"Age",cAtt:"Attendance",cFee:"Nov fee",cAmount:"Amount",cMethod:"Method",cStatus:"Status",cTotal:"Total",cRank:"Rank",cActions:"Actions",
+paid:"Paid",unpaid:"Unpaid",pending:"Partial",present:"Present",absent:"Absent",late:"Late",markPaid:"Mark paid",undo:"Undo",edit:"Edit",del:"Delete",
+studentsW:"students",classesW:"classes",totalStudents:"Sample students",avgAtt:"Avg attendance",topTotal:"Highest total",feeLeft:"Fees still to collect",collected:"Collected",invoiced:"Invoiced (sample roster)",left:"Still to collect",paidN:"paid",ofW:"of",todayAtt:"Today · first class attendance",allGrades:"All grades",allClasses:"All classes",showing:"Showing",inGrade:"in this grade",rosterH:"Students in this class",marksH:"Marks (ranked)",attH:"Attendance · October summary",topInClass:"Top student in this class",topPill:"Top",noStu:"No sample students here yet.",added:"Student saved to the sample roster.",deleted:"Student removed from the sample roster.",attSaved:"Attendance updated.",annPosted:"Announcement posted to the public home page.",annDeleted:"Announcement deleted.",todayLabel:"Today · Sun 1 Nov 2026 (sample day)",
+teachersHead:"Teachers",teachersSub:"Grouped by grade — Grade 12 Teachers first, down to KG Teachers. Subject, class, qualification & experience. View only for students & parents.",welcomeH:"Welcome to Shwe Pyi Soe",welcomeP:"For students & parents — no login needed. Check announcements, grades, teachers, timetables, marks and top achievers, page by page from the sidebar.",latestAnn:"Latest announcement",quickH:"Quick pages",homeTopH:"Top achiever highlights",homeTeachH:"Meet our teachers",seeAll:"See all →",photoNote:"Sample photos — real photos will be uploaded by admin in Phase 2.",qualW:"Qualification",expW:"years experience",teachesW:"Teaches",demoTag:"Demo login (prototype only)",demoUser:"Username",demoEmail:"Email",demoPass:"Password",teachersSuffix:"Teachers",otherW:"Other",headTeacherW:"Head Teacher",classHeadW:"Class Head Teacher",headOfW:"Head Teacher — Class",assignHeadH:"Assign Class Head Teachers",assignHeadSub:"Choose who is in charge of each class. Changes show on the Grade page straight away.",examMarksW:"Exam Marks",schoolYearW:"School Year: June \u2013 February",examsLineW:"Exams: July \u00b7 October \u00b7 December \u00b7 February",showingExamW:"Showing",headTeacherForW:"in charge of this class",catFees:"Fees",catExam:"Exam",catHoliday:"Holiday · Closed",catEvent:"Event",catMeeting:"Meeting",catGeneral:"General",impW:"Important",newW:"NEW",whenW:"When",forW:"For",doW:"What to do",annCatL:"Category",annDateL:"Date",annTargetL:"For which grades",annImpL:"Mark as important",annSumL:"Summary line (short \u2014 shown first)",annActionL:"What parents / students need to do or bring",yesW:"Yes \u2014 pin at the top",noW:"No",targetAll:"All grades",noticeW:"School notice",subjects:{myanmar:"Myanmar",english:"English",maths:"Mathematics",science:"Science",social:"Social Studies",moral:"Moral & Life Skills"},days:["Monday","Tuesday","Wednesday","Thursday","Friday"],periods:["P1 · 8:00","P2 · 8:45","P3 · 9:45","P4 · 10:30","P5 · 11:30","P6 · 1:00","P7 · 1:45","P8 · 2:45"]},
+my:{address:"အမှတ် ၁၈၊ စည်သူလမ်း၊ ပုလဲကန်လမ်းထောင့်၊ ရပ်ကွက် ၆၅၊ တောင်ဒဂုံမြို့နယ်၊ ရန်ကုန်",language:"ဘာသာစကား",portal:"ဝင်ရန်",sbHome:"ပင်မ",sbGrades:"အတန်းများ",sbAdminMenu:"Admin မီနူး",publicBtn:"ကျောင်းသား & မိဘ",adminBtn:"Admin ဝင်ရန်",logoutBtn:"ထွက်မည်",sampleTag:"နမူနာအချက်အလက်",sampleText:"နမူနာကျောင်းသားများသာဖြစ်သည်။ ဤစာမျက်နှာရှိ ကိန်းဂဏန်းအားလုံးကို app တွင်ပြထားသော နမူနာစာရင်းမှ တွက်ချက်ထားသည်။ ပြောင်းလဲမှုများသည် ဤစာမျက်နှာ ဖွင့်ထားစဉ်သာ ကျန်မည်။",annHead:"ကြေညာချက်များ",annSub:"ကျောင်းရုံးမှ · ကျောင်းသားနှင့် မိဘအားလုံးအတွက်",gradesHead:"အတန်းအလိုက် ကြည့်ရန်",gradesSub:"KG မှ Grade 12 · အတန်းကိုနှိပ်၍ အခန်း၊ အချိန်ဇယား၊ အမှတ်နှင့် တက်ရောက်မှု ကြည့်ပါ",topHead:"ထူးချွန်ကျောင်းသားများ",topSub:"ရွေးထားသော စာမေးပွဲအတွက် အခန်းတိုင်းတွင် စုစုပေါင်း အများဆုံး · Grade 12 မှ KG အထိ",overviewHead:"ကျောင်း ခြုံငုံသုံးသပ်ချက်",overviewSub:"ဤစမ်းသပ်ပုံစံရှိ နမူနာစာရင်းမှ တွက်ချက်ထားသည်",backHome:"← ပင်မစာမျက်နှာသို့",ttSub:"တနင်္လာမှ သောကြာ · မနက် ၈:၀၀ – ညနေ ၃:၃၀",loginTitle:"Admin Login",loginSub:"ဝန်ထမ်းများအတွက်သာ။ ကျောင်းသားနှင့် မိဘများ login မလိုပါ — အများသုံး စာမျက်နှာကို လွတ်လပ်စွာ ကြည့်နိုင်သည်။",loginUser:"Username သို့မဟုတ် Email",loginPass:"Password",loginSubmit:"Admin သို့ ဝင်မည်",loginError:"Username/email သို့မဟုတ် password မှားနေပါသည်။ ပြန်ကြိုးစားပါ။",backPublic:"← အများသုံး စာမျက်နှာသို့",navOverview:"ခြုံငုံသုံးသပ်ချက်",navStudents:"ကျောင်းသားများ",navAttendance:"တက်ရောက်မှု",navMarks:"အမှတ်များ",navFees:"ကျောင်းလခ",navAnnounce:"ကြေညာချက်များ",feeProgH:"ကျောင်းလခ ကောက်ခံမှု · နိုဝင်ဘာ",topEveryH:"ထူးချွန်ကျောင်းသား · အတန်းနှင့် အခန်းတိုင်း",searchPh:"အမည်၊ ID၊ မိဘ သို့မဟုတ် ဖုန်းဖြင့် ရှာပါ…",addStudent:"+ ကျောင်းသား ထည့်မည်",fNameEn:"အမည် (အင်္ဂလိပ်)",fNameMy:"အမည် (မြန်မာ)",fGrade:"အတန်း",fSection:"အခန်း",fAge:"အသက်",fParent:"မိဘ / အုပ်ထိန်းသူ အမည်",fPhone:"မိဘဖုန်း",fFeeStatus:"လခ အခြေအနေ",saveStudent:"သိမ်းမည်",cancel:"မလုပ်တော့ပါ",markAll:"အားလုံး တက်ရောက်အဖြစ် မှတ်မည်",examMid:"ဒီဇင်ဘာ စာမေးပွဲ",examMonth:"အောက်တိုဘာ စာမေးပွဲ",marksHint:"အမှတ်ကိုနှိပ်၍ ပြင်ပါ — စုစုပေါင်းနှင့် အဆင့် အလိုအလျောက် ပြောင်းမည်။",feesTitle:"နိုဝင်ဘာ ကျောင်းလခ · Grade 12 မှ KG",feesSub:"ပေးပြီး / မပေးရသေး / တစ်စိတ်တစ်ပိုင်း နှင့် အတန်းတိုင်းတွင် ကျန်ငွေ။",newAnn:"ကြေညာချက်အသစ်",newAnnSub:"အများသုံး ပင်မစာမျက်နှာတွင် ချက်ချင်းပေါ်မည်။",annTE:"ခေါင်းစဉ် (အင်္ဂလိပ်)",annTM:"ခေါင်းစဉ် (မြန်မာ)",annB:"စာသား",postAnn:"ကြေညာချက် တင်မည်",allAnn:"ကြေညာချက်အားလုံး",footer:"ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း · တောင်ဒဂုံ၊ ရန်ကုန် · စမ်းသပ်ပုံစံ — နမူနာအချက်အလက်သာ",
+cStudent:"ကျောင်းသား",cClass:"အခန်း",cParent:"မိဘ",cPhone:"ဖုန်း",cAge:"အသက်",cAtt:"တက်ရောက်မှု",cFee:"နိုဝင်ဘာ လခ",cAmount:"ငွေပမာဏ",cMethod:"ပေးချေပုံ",cStatus:"အခြေအနေ",cTotal:"စုစုပေါင်း",cRank:"အဆင့်",cActions:"လုပ်ဆောင်ချက်",
+paid:"ပေးပြီး",unpaid:"မပေးရသေး",pending:"တစ်စိတ်တစ်ပိုင်း",present:"တက်",absent:"ပျက်",late:"နောက်ကျ",markPaid:"ပေးပြီး မှတ်မည်",undo:"ပြန်ဖျက်မည်",edit:"ပြင်မည်",del:"ဖျက်မည်",
+studentsW:"ဦး",classesW:"ခန်း",totalStudents:"နမူနာ ကျောင်းသား",avgAtt:"ပျမ်းမျှ တက်ရောက်မှု",topTotal:"အများဆုံး စုစုပေါင်း",feeLeft:"ကောက်ခံရန် ကျန်လခ",collected:"ကောက်ခံပြီး",invoiced:"ပြေစာစုစုပေါင်း (နမူနာစာရင်း)",left:"ကောက်ခံရန် ကျန်",paidN:"ပေးပြီး",ofW:"/",todayAtt:"ယနေ့ · ပထမအခန်း တက်ရောက်မှု",allGrades:"အတန်းအားလုံး",allClasses:"အခန်းအားလုံး",showing:"ပြသနေသည်",inGrade:"ဤအတန်းတွင်",rosterH:"ဤအခန်းရှိ ကျောင်းသားများ",marksH:"အမှတ်များ (အဆင့်အလိုက်)",attH:"တက်ရောက်မှု · အောက်တိုဘာ အကျဉ်းချုပ်",topInClass:"ဤအခန်းတွင် ထူးချွန်ကျောင်းသား",topPill:"ထူးချွန်",noStu:"ဤနေရာတွင် နမူနာကျောင်းသား မရှိသေးပါ။",added:"ကျောင်းသားကို နမူနာစာရင်းတွင် သိမ်းပြီးပါပြီ။",deleted:"ကျောင်းသားကို ဖျက်ပြီးပါပြီ။",attSaved:"တက်ရောက်မှု ပြင်ဆင်ပြီးပါပြီ။",annPosted:"ကြေညာချက်ကို အများသုံး စာမျက်နှာတွင် တင်ပြီးပါပြီ။",annDeleted:"ကြေညာချက် ဖျက်ပြီးပါပြီ။",todayLabel:"ယနေ့ · ၂၀၂၆ နိုဝင်ဘာ ၁၊ တနင်္ဂနွေ (နမူနာရက်)",
+teachersHead:"ဆရာ/ဆရာမများ",teachersSub:"ဆရာပရိုဖိုင်များ — ဘာသာရပ်၊ အတန်း၊ အရည်အချင်းနှင့် အတွေ့အကြုံ။",welcomeH:"ရွှေပြည်စိုးမှ ကြိုဆိုပါသည်",welcomeP:"ကျောင်းသားနှင့် မိဘများအတွက် — login မလိုပါ။ ကြေညာချက်၊ အတန်း၊ ဆရာများ၊ အချိန်ဇယား၊ အမှတ်နှင့် ထူးချွန်သူများကို sidebar မှ စာမျက်နှာအလိုက် ကြည့်ပါ။",latestAnn:"နောက်ဆုံး ကြေညာချက်",quickH:"အမြန် စာမျက်နှာများ",homeTopH:"ထူးချွန်သူ အထူးပြု",homeTeachH:"ဆရာများနှင့် တွေ့ဆုံပါ",seeAll:"အားလုံး ကြည့်ရန် →",photoNote:"နမူနာဓာတ်ပုံများ — အမှန်ဓာတ်ပုံများကို Phase 2 တွင် admin မှ တင်ပါမည်။",qualW:"အရည်အချင်း",expW:"နှစ် အတွေ့အကြုံ",teachesW:"သင်ကြားသည်",demoTag:"နမူနာ login (စမ်းသပ်ပုံစံသာ)",demoUser:"Username",demoEmail:"Email",demoPass:"Password",teachersSuffix:"ဆရာ/ဆရာမများ",otherW:"အခြား",headTeacherW:"အတန်းပိုင် ဆရာ/ဆရာမ",classHeadW:"အတန်းပိုင် ဆရာ/ဆရာမ",headOfW:"အတန်းပိုင် — အခန်း",assignHeadH:"အတန်းပိုင် ဆရာ/ဆရာမ ခန့်ထားရန်",assignHeadSub:"အခန်းတိုင်းအတွက် တာဝန်ခံ ဆရာ/ဆရာမကို ရွေးပါ။ အတန်းစာမျက်နှာတွင် ချက်ချင်းပေါ်မည်။",examMarksW:"စာမေးပွဲ အမှတ်များ",schoolYearW:"ပညာသင်နှစ်: ဇွန် \u2013 ဖေဖော်ဝါရီ",examsLineW:"စာမေးပွဲများ: ဇူလိုင် \u00b7 အောက်တိုဘာ \u00b7 ဒီဇင်ဘာ \u00b7 ဖေဖော်ဝါရီ",showingExamW:"ပြသနေသည်",headTeacherForW:"ဤအခန်းကို တာဝန်ယူသည်",catFees:"ကျောင်းလခ",catExam:"စာမေးပွဲ",catHoliday:"ပိတ်ရက်",catEvent:"အခမ်းအနား",catMeeting:"အစည်းအဝေး",catGeneral:"အထွေထွေ",impW:"အရေးကြီး",newW:"အသစ်",whenW:"အချိန်",forW:"သက်ဆိုင်သူများ",doW:"လုပ်ဆောင်ရန်",annCatL:"အမျိုးအစား",annDateL:"ရက်စွဲ",annTargetL:"သက်ဆိုင်သော အတန်းများ",annImpL:"အရေးကြီးအဖြစ် မှတ်ရန်",annSumL:"အကျဉ်းချုပ် (အရင် ပြမည့် စာကြောင်း)",annActionL:"မိဘ / ကျောင်းသားများ လုပ်ဆောင်ရန် သို့မဟုတ် ယူလာရန်",yesW:"ဟုတ်ကဲ့ — ထိပ်ဆုံးတွင် တင်ထားမည်",noW:"မဟုတ်ပါ",targetAll:"အတန်းအားလုံး",noticeW:"ကျောင်း အသိပေးချက်",subjects:{myanmar:"မြန်မာစာ",english:"အင်္ဂလိပ်စာ",maths:"သင်္ချာ",science:"သိပ္ပံ",social:"လူမှုရေး",moral:"စာရိတ္တနှင့် ဘဝ"},days:["တနင်္လာ","အင်္ဂါ","ဗုဒ္ဓဟူး","ကြာသပတေး","သောကြာ"],periods:["၁ · ၈:၀၀","၂ · ၈:၄၅","၃ · ၉:၄၅","၄ · ၁၀:၃၀","၅ · ၁၁:၃၀","၆ · ၁:၀၀","၇ · ၁:၄၅","၈ · ၂:၄၅"]}
+};
+var lang="en"; function t(k){return (I[lang]&&I[lang][k])||I.en[k]||k;} function subj(k){return t("subjects")[k];}
+/* ---------- Data: full sample roster, 4 per grade x 13 grades = 52 ---------- */
+var SUBJECTS=["myanmar","english","maths","science","social","moral"];
+var EXAMS=[{key:"jul",en:"July Exam",my:"ဇူလိုင် စာမေးပွဲ"},{key:"oct",en:"October Exam",my:"အောက်တိုဘာ စာမေးပွဲ"},{key:"dec",en:"December Exam",my:"ဒီဇင်ဘာ စာမေးပွဲ"},{key:"feb",en:"February Exam (Final)",my:"ဖေဖော်ဝါရီ စာမေးပွဲ (နှစ်ဆုံး)"}];
+var currentExam="dec";
+function examObj(k){for(var i=0;i<EXAMS.length;i++)if(EXAMS[i].key===(k||currentExam))return EXAMS[i];return EXAMS[2];}
+function examName(k){var e=examObj(k);return lang==="my"?e.my:e.en;}
+function examTagText(k){var kk=k||currentExam;if(kk==="feb")return lang==="my"?"ဖေဖော်ဝါရီ စာမေးပွဲ အမှတ်များ":"February Exam Marks";return examName(k)+" "+(lang==="my"?"အမှတ်များ":"Marks");} function schoolYearText(){return lang==="my"?"ပညာသင်နှစ်: ဇွန် – ဖေဖော်ဝါရီ":"School Year: June – February";} function examsLineText(){return lang==="my"?"စာမေးပွဲများ: ဇူလိုင် · အောက်တိုဘာ · ဒီဇင်ဘာ · ဖေဖော်ဝါရီ":"Exams: July · October · December · February";} function renderSchoolYear(){document.querySelectorAll("[data-school-year]").forEach(function(el){el.textContent=schoolYearText()+" · "+examsLineText();});}
+function examShort(k){return examName(k);}
+function makeExamMarks(base,seedBase){var out={};EXAMS.forEach(function(ex,ei){var m={};SUBJECTS.forEach(function(s,si){var v=(base[s]||0);if(ex.key==="dec"){m[s]=v;}else{var h=Math.abs(Math.sin((seedBase+11)*(ei+3)*(si+5)*12.9898)*43758.5453);var delta=Math.floor((h%1)*17)-8; /* -8..+8 */ m[s]=Math.max(38,Math.min(100,v+delta));}});out[ex.key]=m;});return out;}
+function getMarks(s,ek){ek=ek||currentExam;if(s.examMarks&&s.examMarks[ek])return s.examMarks[ek];return s.marks||{};}
+function totalFor(s,ek){var m=getMarks(s,ek);return SUBJECTS.reduce(function(a,k){return a+(m[k]||0);},0);}
+var GRADES=["KG","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5","Grade 6","Grade 7","Grade 8","Grade 9","Grade 10","Grade 11","Grade 12"];
+function grank(g){return g==="KG"?0:parseInt(g.replace("Grade ",""),10);}
+function feeFor(g){var r=grank(g);return r===0?60000:r<=4?70000:r<=8?95000:140000;}
+var FIRST_EN=["May Thazin","Thant Zin","Su Myat","Kaung Khant","Thiri","Hein Htet","Yoon Me Me","Phone Myat","Nilar","Arkar","Ei Shwe","Wai Yan","Cherry","Nay Lin","Hnin Yu","Sai Khant","Thandar","Aung Khant","May Myat","Zaw Htet","Su Mon","Khant Min","Thae Su","Bhone Myat","May Khin","Htet Wai","Nyein Chan","Shwe Yee","Min Khant","Su Hlaing","Thura","May Thiri"];
+var FIRST_MY=["မေသဇင်","သန့်စင်","ဆုမြတ်","ကောင်းခန့်","သီရိ","ဟိန်းထက်","ယွန်းမီမီ","ဖုန်းမြတ်","နီလာ","အာကာ","အိရွှေစင်","ဝေယံ","ချယ်ရီ","နေလင်း","နှင်းယု","စိုင်းခန့်","သန္တာ","အောင်ခန့်","မေမြတ်","ဇော်ထက်","ဆုမွန်","ခန့်မင်း","သဲဆု","ဘုန်းမြတ်","မေခင်","ထက်ဝေ","ငြိမ်းချမ်း","ရွှေရည်","မင်းခန့်","ဆုလှိုင်","သူရ","မေသီရိ"];
+var LAST_EN=["Hlaing","Oo","Noe","Zaw","Nanda","Aung","Khine","Min","Win","Phyo","Sin","Tun","Myint","Aung","Wai","Khant","Moe","Thu","Mon","Lin","Aye","Htet","Nwe","Ko","San","Yan","Oo","Win","Zaw","Thaw","Naing","Htwe"];
+var PARENT_EN=["U Hlaing Win","Daw Khin Mar Oo","U Aung Myat","U Zaw Min","Daw Nanda Aye","U Htet Aung","U Khine Soe","Daw Myat Thida","U Win Naing","U Phyo Wai","Daw Shwe Yi","U Tun Lin","U Myint Oo","Daw Aye Chan","U Wai Phyo","U Khant Zin","Daw Moe Sandar"];
+function buildRoster(){
+  var out=[],n=0;
+  GRADES.forEach(function(g,gi){
+    for(var k=0;k<4;k++){
+      n++; var idx=(gi*4+k)%32; var seed=(gi*7+k*13+5);
+      var marks={}; SUBJECTS.forEach(function(s,si){ marks[s]=Math.max(52,Math.min(99, 68+((seed*(si+3))%32) - (k*2) )); });
+      var totalDays=23, absent=(seed%3), late=(seed%2);
+      var statusCycle=["paid","unpaid","paid","pending"]; var st=statusCycle[(gi+k)%4];
+      out.push({id:"SPS-2026-"+String(n).padStart(3,"0"),en:(k%2? "Mg ":"Ma ")+FIRST_EN[idx]+" "+LAST_EN[(idx+gi)%32],my:(k%2?"မောင်":"မ ")+FIRST_MY[idx],grade:g,section:k<2?"A":"B",age:(grank(g)===0?5:5+grank(g))+(k===3?1:0),parent:PARENT_EN[(gi+k)%PARENT_EN.length],phone:"09 "+(700+((seed*37)%280))+" "+(100+((seed*53)%880))+" "+(100+((seed*91)%880)),fee:feeFor(g),feeStatus:st,method:st==="paid"?(k%2?"KBZPay":"WavePay"):st==="pending"?"Cash":"—",att:{p:totalDays-absent-late,a:absent,l:late},marks:marks,examMarks:makeExamMarks(marks,seed+n)});
+    }
+  });
+  return out;
 }
-el('add').addEventListener('click',()=>{el('form').reset();el('error').textContent='';el('dialog').showModal();el('name').focus();});
-el('close').addEventListener('click',()=>el('dialog').close());
-el('form').addEventListener('submit',event=>{event.preventDefault();const name=el('name').value.trim(),id=el('id').value.trim(),age=Number(el('age').value),mark=Number(el('mark').value);if(records.length>=4)return;if(!name){el('error').textContent='Please enter a name.';return;}if(records.some(s=>s.id.toLowerCase()===id.toLowerCase())){el('error').textContent='That student ID already exists.';return;}if(!id||!Number.isInteger(age)||age<1||age>120||!Number.isFinite(mark)||mark<0||mark>100){el('error').textContent='Please check the student details.';return;}records.push({name,id,age,mark});el('search').value='';render();el('dialog').close();});
-el('search').addEventListener('input',render);
-el('nav-all').addEventListener('click',()=>{el('search').value='';render();window.scrollTo({top:0,behavior:'smooth'});});
-el('nav-search').addEventListener('click',()=>el('search').focus());
-render();
+var students=buildRoster();
+
+var teachers=[
+ {id:"T01",en:"Daw Thiri Nanda",my:"ဒေါ်သီရိနန္ဒာ",subject:"myanmar",grade:"Grade 10-A",qual:"B.A (Myanmar), B.Ed",exp:12,photo:"https://randomuser.me/api/portraits/women/44.jpg"},
+ {id:"T02",en:"U Kaung Khant Zaw",my:"ဦးကောင်းခန့်ဇော်",subject:"maths",grade:"Grade 12-A",qual:"B.Sc (Maths), M.Sc",exp:10,photo:"https://randomuser.me/api/portraits/men/32.jpg"},
+ {id:"T03",en:"Daw May Thazin Oo",my:"ဒေါ်မေသဇင်ဦး",subject:"english",grade:"Grade 9-A",qual:"B.A (English), Dip. TESOL",exp:8,photo:"https://randomuser.me/api/portraits/women/68.jpg"},
+ {id:"T04",en:"U Hein Htet Aung",my:"ဦးဟိန်းထက်အောင်",subject:"science",grade:"Grade 11-B",qual:"B.Sc (Physics), B.Ed",exp:9,photo:"https://randomuser.me/api/portraits/men/45.jpg"},
+ {id:"T05",en:"Daw Su Myat Noe",my:"ဒေါ်ဆုမြတ်နိုး",subject:"social",grade:"Grade 7-A",qual:"B.A (History), B.Ed",exp:7,photo:"https://randomuser.me/api/portraits/women/12.jpg"},
+ {id:"T06",en:"Daw Nilar Win",my:"ဒေါ်နီလာဝင်း",subject:"moral",grade:"Grade 5-A",qual:"B.A, B.Ed",exp:11,photo:"https://randomuser.me/api/portraits/women/33.jpg"},
+ {id:"T07",en:"U Thant Zin",my:"ဦးသန့်စင်",subject:"maths",grade:"Grade 6-B",qual:"B.Sc (Maths)",exp:6,photo:"https://randomuser.me/api/portraits/men/22.jpg"},
+ {id:"T08",en:"Daw Ei Shwe Sin",my:"ဒေါ်အိရွှေစင်",subject:"english",grade:"Grade 4-A",qual:"B.A (English)",exp:5,photo:"https://randomuser.me/api/portraits/women/56.jpg"},
+ {id:"T09",en:"Daw Cherry Moe",my:"ဒေါ်ချယ်ရီမိုး",subject:"myanmar",grade:"KG-A",qual:"B.A, ECCD Certificate",exp:6,photo:"https://randomuser.me/api/portraits/women/17.jpg"},
+ {id:"T10",en:"U Wai Yan Phyo",my:"ဦးဝေယံဖြိုး",subject:"science",grade:"Grade 8-B",qual:"B.Sc (Chemistry)",exp:7,photo:"https://randomuser.me/api/portraits/men/67.jpg"},
+ {id:"T11",en:"Daw Hnin Yu Wai",my:"ဒေါ်နှင်းယုဝေ",subject:"social",grade:"Grade 3-A",qual:"B.A (Geography), B.Ed",exp:9,photo:"https://randomuser.me/api/portraits/women/29.jpg"},
+ {id:"T12",en:"U Nay Lin Tun",my:"ဦးနေလင်းထွန်း",subject:"moral",grade:"Grade 2-B",qual:"B.A, B.Ed",exp:4,photo:"https://randomuser.me/api/portraits/men/75.jpg"},
+ {id:"T13",en:"Daw Thae Su Nwe",my:"ဒေါ်သဲဆုနွယ်",subject:"english",grade:"Grade 1-A",qual:"B.A (English), ECCD Certificate",exp:5,photo:"https://randomuser.me/api/portraits/women/65.jpg"},
+ {id:"T14",en:"U Sai Khant",my:"ဦးစိုင်းခန့်",subject:"science",grade:"Grade 12-B",qual:"B.Sc (Chemistry), B.Ed",exp:8,photo:"https://randomuser.me/api/portraits/men/11.jpg"},
+ {id:"T15",en:"Daw May Khin San",my:"ဒေါ်မေခင်စန်း",subject:"moral",grade:"KG-B",qual:"B.A, ECCD Certificate",exp:5,photo:"https://randomuser.me/api/portraits/women/21.jpg"},
+ {id:"T16",en:"U Bhone Myat Ko",my:"ဦးဘုန်းမြတ်ကို",subject:"maths",grade:"Grade 1-B",qual:"B.Sc (Maths), ECCD Certificate",exp:4,photo:"https://randomuser.me/api/portraits/men/18.jpg"},
+ {id:"T17",en:"Daw Thandar Moe",my:"ဒေါ်သန္တာမိုး",subject:"myanmar",grade:"Grade 2-A",qual:"B.A (Myanmar), B.Ed",exp:8,photo:"https://randomuser.me/api/portraits/women/47.jpg"},
+ {id:"T18",en:"Daw Su Mon Aye",my:"ဒေါ်ဆုမွန်အေး",subject:"english",grade:"Grade 3-B",qual:"B.A (English), B.Ed",exp:6,photo:"https://randomuser.me/api/portraits/women/26.jpg"},
+ {id:"T19",en:"U Zaw Htet Lin",my:"ဦးဇော်ထက်လင်း",subject:"science",grade:"Grade 4-B",qual:"B.Sc, B.Ed",exp:7,photo:"https://randomuser.me/api/portraits/men/36.jpg"},
+ {id:"T20",en:"Daw May Myat Mon",my:"ဒေါ်မေမြတ်မွန်",subject:"maths",grade:"Grade 5-B",qual:"B.Sc (Maths), B.Ed",exp:9,photo:"https://randomuser.me/api/portraits/women/38.jpg"},
+ {id:"T21",en:"U Aung Khant Thu",my:"ဦးအောင်ခန့်သူ",subject:"english",grade:"Grade 6-A",qual:"B.A (English), B.Ed",exp:7,photo:"https://randomuser.me/api/portraits/men/52.jpg"},
+ {id:"T22",en:"Daw Htet Wai Yan",my:"ဒေါ်ထက်ဝေယံ",subject:"science",grade:"Grade 7-B",qual:"B.Sc (Biology), B.Ed",exp:6,photo:"https://randomuser.me/api/portraits/women/57.jpg"},
+ {id:"T23",en:"U Khant Min Zaw",my:"ဦးခန့်မင်းဇော်",subject:"maths",grade:"Grade 8-A",qual:"B.Sc (Maths), M.Sc",exp:10,photo:"https://randomuser.me/api/portraits/men/41.jpg"},
+ {id:"T24",en:"Daw Shwe Yee Win",my:"ဒေါ်ရွှေရည်ဝင်း",subject:"myanmar",grade:"Grade 9-B",qual:"B.A (Myanmar), M.A",exp:11,photo:"https://randomuser.me/api/portraits/women/79.jpg"},
+ {id:"T25",en:"U Min Khant Naing",my:"ဦးမင်းခန့်နိုင်",subject:"social",grade:"Grade 10-B",qual:"B.A (History), B.Ed",exp:8,photo:"https://randomuser.me/api/portraits/men/29.jpg"},
+ {id:"T26",en:"Daw Thiri Htwe",my:"ဒေါ်သီရိထွေး",subject:"english",grade:"Grade 11-A",qual:"B.A (English), M.A",exp:12,photo:"https://randomuser.me/api/portraits/women/90.jpg"}
+];
+var headMap={};
+function rebuildHeadMapFromTeachers(){headMap={};teachers.forEach(function(te){if(te.grade&&te.grade!=="—")headMap[te.grade]=te.id;});}
+rebuildHeadMapFromTeachers();
+/* Explicit assignments ensure every class in sample data has a head teacher */
+(function(){var allCls=[];GRADES.forEach(function(g){["A","B"].forEach(function(s){allCls.push(g+"-"+s);});});allCls.forEach(function(c,i){if(!headMap[c]){var te=teachers[i%teachers.length];headMap[c]=te.id;}});})();
+function headTeacherFor(clsStr){var tid=headMap[clsStr];var found=null;teachers.forEach(function(te){if(te.id===tid)found=te;});if(found)return found;teachers.forEach(function(te){if(te.grade===clsStr)found=te;});return found||teachers[0];}
+function headClassForTeacher(te){var cs=[];Object.keys(headMap).forEach(function(c){if(headMap[c]===te.id)cs.push(c);});return cs;}
+function sortedClassesDesc(){var a=[];GRADES.slice().reverse().forEach(function(g){["A","B"].forEach(function(s){a.push(g+"-"+s);});});return a;}
+function studentPhoto(s){var n=parseInt((s.id||"").replace(/\D/g,""),10)||1;var isBoy=(s.en||"").indexOf("Mg ")===0;var folder=isBoy?"men":"women";var idx=(n*7)%90+1;return "https://randomuser.me/api/portraits/"+folder+"/"+idx+".jpg";}
+function teacherName(te){return lang==="my"?(te.my||te.en):te.en;}
+function teacherCard(te){var hc=headClassForTeacher(te);var hb=hc.length?hc.map(function(c){return '<span class="head-badge">'+esc(t("headOfW"))+' '+esc(c)+'</span>';}).join(" "):"";return '<div class="card teacher-card"><img class="avatar avatar-lg" src="'+te.photo+'" alt="Sample photo of '+esc(te.en)+'"/><h3>'+esc(teacherName(te))+'</h3><div class="myname">'+esc(lang==="my"?te.en:te.my)+'</div><div style="margin-top:8px"><span class="badge paid">'+esc(subj(te.subject))+'</span> <span class="badge info">'+esc(te.grade)+'</span></div>'+(hb?'<div style="margin-top:8px">'+hb+'</div>':"")+'<p class="sub" style="margin-top:10px">'+esc(te.qual)+'<br/>'+te.exp+' '+t("expW")+'</p><div class="photo-note">'+t("photoNote")+'</div></div>';}
+
+var announcements=[
+ {d:"30 Oct 2026",cat:"fees",important:true,isNew:true,target:"all",enT:"November tuition — due 10 Nov",myT:"နိုဝင်ဘာ ကျောင်းလခ — နောက်ဆုံးရက် နိုဝင်ဘာ ၁၀",summaryEn:"November tuition is due — please pay by Tuesday 10 November.",summaryMy:"နိုဝင်ဘာ ကျောင်းလခ ပေးရန် နောက်ဆုံးရက် နီးနေပါပြီ — နိုဝင်ဘာ ၁၀ ရက် (အင်္ဂါနေ့) နောက်ဆုံးထား ပေးပါ။",whenEn:"Pay by Tue 10 Nov 2026",whenMy:"နိုဝင်ဘာ ၁၀ ရက် (အင်္ဂါနေ့) နောက်ဆုံးထား",actionEn:"Pay via KBZPay, WavePay or cash at the school office — keep your receipt.",actionMy:"KBZPay, WavePay သို့မဟုတ် ကျောင်းရုံးတွင် ငွေသားဖြင့် ပေးပါ။ ပြေစာကို သိမ်းထားပါ။",enB:"Please pay November tuition by 10 November via KBZPay, WavePay or cash at the school office. Keep your receipt.",myB:"နိုဝင်ဘာ ကျောင်းလခကို နိုဝင်ဘာ ၁၀ ရက်နေ့ နောက်ဆုံးထား၍ KBZPay, WavePay သို့မဟုတ် ကျောင်းရုံးတွင် ပေးချေပေးပါ။ ပြေစာကို သိမ်းထားပေးပါ။"},
+ {d:"28 Oct 2026",cat:"exam",important:false,isNew:true,target:"all",enT:"October Exam report cards ready",myT:"အောက်တိုဘာ စာမေးပွဲ အမှတ်စာရင်း ရပါပြီ",summaryEn:"October Exam report cards are ready — collect yours from Friday.",summaryMy:"အောက်တိုဘာ စာမေးပွဲ အမှတ်စာရင်း ရပါပြီ — သောကြာနေ့မှစ၍ ထုတ်ယူနိုင်ပါပြီ။",whenEn:"From Fri 30 Oct 2026",whenMy:"အောက်တိုဘာ ၃၀ ရက် (သောကြာနေ့) မှစ၍",actionEn:"Collect the report card from your class teacher.",actionMy:"အမှတ်စာရင်းကို အတန်းပိုင်ဆရာထံတွင် ထုတ်ယူပါ။",enB:"October Exam report cards can be collected from class teachers from Friday. Marks are also on this page, grade by grade — use the exam switcher to see July, October, December and February marks.",myB:"နှစ်ဝက် အမှတ်စာရင်းများကို သောကြာနေ့မှစ၍ အတန်းပိုင်ဆရာများထံတွင် ထုတ်ယူနိုင်ပါသည်။ အမှတ်များကို ဤစာမျက်နှာတွင်လည်း အတန်းအလိုက် ကြည့်နိုင်ပါသည်။"},
+ {d:"24 Oct 2026",cat:"holiday",important:true,isNew:false,target:"all",enT:"School closed — Thadingyut holiday",myT:"ကျောင်းပိတ်ရက် — သီတင်းကျွတ်",summaryEn:"School is closed for Thadingyut — no classes on 3–4 November.",summaryMy:"သီတင်းကျွတ်အတွက် ကျောင်းပိတ်ပါသည် — နိုဝင်ဘာ ၃–၄ ရက် အတန်းမရှိပါ။",whenEn:"Closed Tue 3 – Wed 4 Nov 2026 · back Thu 5 Nov",whenMy:"နိုဝင်ဘာ ၃ ရက် (အင်္ဂါ) – ၄ ရက် (ဗုဒ္ဓဟူး) ပိတ်သည် · ၅ ရက် (ကြာသပတေး) ပြန်ဖွင့်မည်",actionEn:"No classes on 3–4 Nov — students return on Thursday 5 Nov.",actionMy:"နိုဝင်ဘာ ၃–၄ ရက် အတန်းမရှိပါ — ၅ ရက်နေ့တွင် ပြန်တက်ပါ။",enB:"School is closed 3–4 November for Thadingyut. Classes resume 5 November.",myB:"သီတင်းကျွတ်အတွက် နိုဝင်ဘာ ၃–၄ ရက်တွင် ကျောင်းပိတ်ပါမည်။ နိုဝင်ဘာ ၅ ရက်တွင် ပြန်ဖွင့်ပါမည်။"}
+];
+
+var BASE_TT=[["myanmar","english","maths","science","maths","social","english","moral"],["english","maths","myanmar","social","science","maths","myanmar","english"],["maths","science","english","myanmar","social","english","science","maths"],["science","myanmar","social","maths","english","myanmar","maths","science"],["english","social","maths","english","myanmar","science","moral","myanmar"]];
+function ttFor(g,sec){var sh=(grank(g)+(sec.charCodeAt(0)-65))%6;return BASE_TT.map(function(r){return r.map(function(k){return SUBJECTS[(SUBJECTS.indexOf(k)+sh)%6];});});}
+var attState={}; students.forEach(function(s,i){attState[s.id]= i%11===5?"absent": i%7===3?"late":"present";});
+var isAdmin=false, selGrade=null, selSection="A";
+/* ---------- helpers ---------- */
+function byId(id){return document.getElementById(id);}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function nameOf(s){return lang==="my"?(s.my||s.en):s.en;}
+function fmt(n){return n.toLocaleString("en-US")+" Ks";}
+function total(s){return totalFor(s,currentExam);}
+function cls(s){return s.grade+"-"+s.section;}
+function attPct(s){var d=s.att.p+s.att.a+s.att.l;return d?Math.round((s.att.p+s.att.l)/d*100):0;}
+function inGrade(g){return students.filter(function(s){return s.grade===g;});}
+function sections(g){var m={};inGrade(g).forEach(function(s){m[s.section]=1;});return Object.keys(m).sort();}
+function classList(){var m={},o=[];students.forEach(function(s){if(!m[cls(s)]){m[cls(s)]=1;o.push(cls(s));}});return o.sort(function(a,b){return grank(a.split("-")[0])-grank(b.split("-")[0])||a.localeCompare(b);});}
+function topPerClass(){var ordered=classList().slice().sort(function(a,b){var pa=a.split("-"),pb=b.split("-");var d=grank(pb[0])-grank(pa[0]);if(d)return d;return (pa[1]||"").localeCompare(pb[1]||"");});return ordered.map(function(c){var l=students.filter(function(s){return cls(s)===c;});var top=l.slice().sort(function(a,b){return total(b)-total(a);})[0];return{cls:c,student:top,total:top?total(top):0};});}
+function remain(s){return s.feeStatus==="paid"?0:s.feeStatus==="pending"?Math.round(s.fee/2):s.fee;}
+function feeBadge(s){return '<span class="badge '+s.feeStatus+'">'+t(s.feeStatus==="pending"?"pending":s.feeStatus)+"</span>";}
+function applyStatic(){document.querySelectorAll("[data-i18n]").forEach(function(el){el.textContent=t(el.getAttribute("data-i18n"));});document.querySelectorAll("[data-i18n-ph]").forEach(function(el){el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph")));});document.documentElement.lang=lang;byId("schoolName").textContent=lang==="my"?"ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း":"Shwe Pyi Soe Private High School";byId("schoolName2").textContent=lang==="my"?"Shwe Pyi Soe Private High School":"ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း";byId("langEn").setAttribute("aria-pressed",lang==="en");byId("langMy").setAttribute("aria-pressed",lang==="my");byId("langEn2").setAttribute("aria-pressed",lang==="en");byId("langMy2").setAttribute("aria-pressed",lang==="my");byId("sbSchoolName").textContent=lang==="my"?"ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း":"Shwe Pyi Soe Private High School";byId("sbSchoolName2").textContent=lang==="my"?"Shwe Pyi Soe Private High School":"ရွှေပြည်စိုးကိုယ်ပိုင်အထက်တန်းကျောင်း";}
+/* ---------- public ---------- */
+var CATS=["fees","exam","holiday","event","meeting","general"];
+var CATKEY={fees:"catFees",exam:"catExam",holiday:"catHoliday",event:"catEvent",meeting:"catMeeting",general:"catGeneral"};
+var CATICON={
+fees:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/></svg>',
+exam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h8l4 4v16H6z"/><path d="M14 2v4h4"/><path d="M9 12h6M9 16h6"/></svg>',
+holiday:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
+event:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6-5.4-3-5.4 3 1.1-6L3.2 9.4l6.1-.8z"/></svg>',
+meeting:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c.6-3.2 2.8-5 5.5-5s4.9 1.8 5.5 5"/><circle cx="17.5" cy="9" r="2.6"/><path d="M16 15.2c2.3.3 3.9 1.9 4.4 4.8"/></svg>',
+general:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><circle cx="12" cy="8" r="1" fill="currentColor" stroke="none"/></svg>'};
+function catOf(a){return CATS.indexOf(a.cat)>-1?a.cat:"general";}
+function annTargetLabel(a){if(!a.target||a.target==="all")return t("targetAll");return a.target;}
+function annSorted(){return announcements.map(function(a,i){return{a:a,i:i};}).sort(function(x,y){var d=(y.a.important?1:0)-(x.a.important?1:0);if(d)return d;return x.i-y.i;});}
+function annCardHTML(a,idx,del){
+  var cat=catOf(a);
+  var ti=lang==="my"?(a.myT||a.enT):a.enT;
+  var sum=lang==="my"?(a.summaryMy||a.summaryEn||a.myB||a.enB):(a.summaryEn||a.enB);
+  var bo=lang==="my"?(a.myB||a.enB):a.enB;
+  var when=lang==="my"?(a.whenMy||a.whenEn):(a.whenEn||a.d);
+  var act=lang==="my"?(a.actionMy||a.actionEn):a.actionEn;
+  var keys='<div class="ann-keys"><div class="ann-key"><span>'+t("whenW")+'</span><strong>'+esc(when||a.d)+'</strong></div><div class="ann-key"><span>'+t("forW")+'</span><strong>'+esc(annTargetLabel(a))+'</strong></div>'+(act?'<div class="ann-key"><span>'+t("doW")+'</span><strong>'+esc(act)+'</strong></div>':"")+'</div>';
+  return '<article class="ann-card'+(a.important?" is-important":"")+'"><div class="ann-top"><span class="cat-badge cat-'+cat+'">'+CATICON[cat]+esc(t(CATKEY[cat]))+'</span>'+(a.important?'<span class="pill-imp">★ '+esc(t("impW"))+'</span>':"")+(a.isNew?'<span class="pill-new">'+esc(t("newW"))+'</span>':"")+'<time class="ann-date">'+esc(a.d)+'</time></div><h4 class="ann-title">'+esc(ti)+'</h4>'+(sum?'<p class="ann-summary">'+esc(sum)+'</p>':"")+keys+(bo&&bo!==sum?'<p class="ann-body">'+esc(bo)+'</p>':"")+(del?'<div style="margin-top:12px"><button type="button" class="btn danger small" data-delann="'+idx+'">'+t("del")+'</button></div>':"")+'</article>';
+}
+function annHTML(list,del){var items=annSorted();if(!items.length)return '<p class="sub">—</p>';return '<div class="ann-stack">'+items.map(function(x){return annCardHTML(x.a,x.i,del);}).join("")+'</div>';}
+function fillAnnOptions(){
+  var c=byId("annCat"); if(c){var cv=c.value||"general"; c.innerHTML=CATS.map(function(k){return '<option value="'+k+'">'+esc(t(CATKEY[k]))+'</option>';}).join(""); c.value=CATS.indexOf(cv)>-1?cv:"general";}
+  var tg=byId("annTarget"); if(tg){var tv=tg.value||"all"; tg.innerHTML='<option value="all">'+esc(t("targetAll"))+'</option>'+GRADES.map(function(g){return '<option value="'+g+'">'+g+'</option>';}).join(""); tg.value=tv;}
+  var im=byId("annImportant"); if(im){var iv=im.value||"no"; im.innerHTML='<option value="no">'+esc(t("noW"))+'</option><option value="yes">'+esc(t("yesW"))+'</option>'; im.value=iv;}
+}
+function renderAnn(){byId("publicAnn").innerHTML=annHTML(announcements,false);byId("adminAnn").innerHTML=annHTML(announcements,true);byId("adminAnn").querySelectorAll("[data-delann]").forEach(function(b){b.addEventListener("click",function(){announcements.splice(+b.getAttribute("data-delann"),1);byId("annMsg").textContent=t("annDeleted");renderAnn();renderHome();});});fillAnnOptions();var srt=annSorted();if(byId("homeLatestAnn"))byId("homeLatestAnn").innerHTML=srt.length?annCardHTML(srt[0].a,srt[0].i,false):'<p class="sub">—</p>';}
+
+
+function teacherBaseGrade(te){var g=(te.grade||"").trim();var m=g.match(/^(Grade\s*\d+|KG)/i);return m?m[1].replace(/^grade/i,"Grade"):g;}
+function teacherGroups(){var known={};GRADES.forEach(function(g){known[g]=1;});var groups=GRADES.slice().reverse().map(function(g){return{grade:g,list:teachers.filter(function(te){return teacherBaseGrade(te)===g;})};});var other=teachers.filter(function(te){return !known[teacherBaseGrade(te)];});if(other.length)groups.push({grade:"Other",list:other});return groups;}
+function teachGroupHead(g){return g==="Other"?(t("otherW")+" "+t("teachersSuffix")):(g+" "+t("teachersSuffix"));}
+function renderTeachers(){
+  var fEl=byId("teachFilter"); if(fEl){var cur=fEl.value; fEl.innerHTML='<option value="">All subjects</option>'+SUBJECTS.map(function(k){return '<option value="'+k+'">'+subj(k)+'</option>';}).join(""); fEl.value=cur;}
+  var filter=fEl?fEl.value:"";
+  if(byId("publicTeachers")) byId("publicTeachers").innerHTML=teacherGroups().map(function(gr){var list=gr.list.filter(function(te){return !filter||te.subject===filter;});if(!list.length)return"";return '<section class="teach-group"><div class="teach-group-h"><h3>'+esc(teachGroupHead(gr.grade))+'</h3><span class="badge info">'+list.length+' '+t("teachersSuffix")+'</span></div><div class="teacher-grid">'+list.map(teacherCard).join("")+'</div></section>';}).join("")||'<p class="sub">'+t("noStu")+'</p>';
+  if(byId("homeTeachers")) byId("homeTeachers").innerHTML=teachers.slice(0,4).map(teacherCard).join("");
+  if(byId("adminTeachers")) byId("adminTeachers").innerHTML=teacherGroups().map(function(gr){if(!gr.list.length)return"";return '<section class="teach-group"><div class="teach-group-h"><h3>'+esc(teachGroupHead(gr.grade))+'</h3><span class="badge info">'+gr.list.length+'</span></div><div class="teacher-grid">'+gr.list.map(function(te){var hc=headClassForTeacher(te);var hb=hc.length?hc.map(function(c){return '<span class="head-badge">'+esc(t("headOfW"))+' '+esc(c)+'</span>';}).join(" "):"";return '<div class="card teacher-card"><img class="avatar" src="'+te.photo+'" alt="Sample photo of '+esc(te.en)+'"/><h3>'+esc(te.en)+'</h3>'+(hb?'<div style="margin-top:6px">'+hb+'</div>':"")+'<div class="sub">'+esc(subj(te.subject))+' · '+esc(te.grade)+'<br/>'+esc(te.qual)+' · '+te.exp+' yrs</div><div style="margin-top:10px;display:flex;gap:8px;justify-content:center"><button type="button" class="btn ghost small" data-tedit="'+te.id+'">'+t("edit")+'</button><button type="button" class="btn danger small" data-tdel="'+te.id+'">'+t("del")+'</button></div></div>';}).join("")+'</div></section>';}).join("");
+  renderHeadAssign();
+  if(byId("adminTeachers")){
+    byId("adminTeachers").querySelectorAll("[data-tdel]").forEach(function(b){b.addEventListener("click",function(){teachers=teachers.filter(function(x){return x.id!==b.getAttribute("data-tdel");});renderTeachers();});});
+    byId("adminTeachers").querySelectorAll("[data-tedit]").forEach(function(b){b.addEventListener("click",function(){var te=null;teachers.forEach(function(x){if(x.id===b.getAttribute("data-tedit"))te=x;});if(!te)return;byId("teachForm").classList.remove("hidden");byId("tfId").value=te.id;byId("tfNameEn").value=te.en;byId("tfNameMy").value=te.my||"";byId("tfSubject").value=te.subject;byId("tfGrade").value=te.grade;byId("tfQual").value=te.qual;byId("tfExp").value=te.exp;byId("tfPhoto").value=te.photo;window.scrollTo({top:0,behavior:"smooth"});});});
+  }
+  var ts=byId("tfSubject"); if(ts&&!ts.options.length){ts.innerHTML=SUBJECTS.map(function(k){return '<option value="'+k+'">'+subj(k)+'</option>';}).join("");}
+}
+
+function renderExamUI(){if(typeof renderSchoolYear==="function")renderSchoolYear();document.querySelectorAll("[data-exam-tag]").forEach(function(el){el.textContent=examTagText();});document.querySelectorAll("[data-exam-chips]").forEach(function(wrap){wrap.innerHTML=EXAMS.map(function(ex){return '<button type="button" data-exam-key="'+ex.key+'" aria-pressed="'+(ex.key===currentExam)+'">'+esc(examName(ex.key))+'</button>';}).join("");wrap.querySelectorAll("[data-exam-key]").forEach(function(b){b.addEventListener("click",function(){setExam(b.getAttribute("data-exam-key"));});});});var me=byId("marksExam");if(me)me.value=currentExam;}
+function setExam(k){if(EXAMS.some(function(e){return e.key===k;}))currentExam=k;renderExamUI();renderHome();if(byId("view-grade").classList.contains("active")&&selGrade)renderGrade();if(isAdmin){renderMarks();byId("adminTop").innerHTML=topHTML();}}
+function topHTML(){return topPerClass().map(function(x){if(!x.student)return"";var s=x.student;return '<div class="card achiever-card"><span class="rank-pill">'+t("topPill")+' · '+esc(x.cls)+'</span><div style="margin-top:8px"><span class="exam-tag gold">'+esc(examTagText())+'</span></div><div style="margin-top:12px"><img class="avatar avatar-lg" src="'+studentPhoto(s)+'" alt="Sample photo of '+esc(s.en)+'"/></div><h3>'+esc(nameOf(s))+'</h3><div class="sub">'+esc(s.en)+' · '+s.id+'</div><div class="sub">'+esc(x.cls)+'</div><div style="font-weight:800;margin-top:6px">'+t("cTotal")+' '+x.total+' / 600</div><div class="sub">'+esc(examTagText())+'</div><div class="sub">'+t("cAtt")+' '+attPct(s)+'%</div><div class="photo-note">'+t("photoNote")+'</div></div>';}).join("");}
+function renderHome(){
+  byId("gradeGrid").innerHTML=GRADES.map(function(g){var l=inGrade(g);var top=l.slice().sort(function(a,b){return total(b)-total(a);})[0];var avg=l.length?Math.round(l.reduce(function(a,s){return a+attPct(s);},0)/l.length):0;
+    return '<button type="button" class="card grade-card" data-grade="'+g+'"><div class="gn">'+g+'</div><div class="gc">'+l.length+'</div><div class="sub">'+t("studentsW")+" · "+sections(g).length+" "+t("classesW")+" · "+t("cAtt")+" "+avg+'%</div>'+(top?'<div style="margin-top:8px"><span class="badge top">'+esc(nameOf(top))+" · "+total(top)+"/600</span></div>":"")+"</button>";}).join("");
+  byId("gradeGrid").querySelectorAll("[data-grade]").forEach(function(b){b.addEventListener("click",function(){openGrade(b.getAttribute("data-grade"));});});
+  byId("publicTop").innerHTML=topHTML();
+  if(byId("homeTop")) byId("homeTop").innerHTML=topPerClass().slice(0,4).map(function(x,i){if(!x.student)return"";var s=x.student;return '<div class="card achiever-card"><span class="rank-pill">'+t("topPill")+' · '+esc(x.cls)+'</span><img style="margin-top:10px" class="avatar" src="'+studentPhoto(s)+'" alt="Sample photo of '+esc(s.en)+'"/><h3>'+esc(nameOf(s))+'</h3><div class="sub">'+esc(x.cls)+' · '+x.total+'/600</div></div>';}).join("");
+  if(byId("homeStats")) byId("homeStats").innerHTML="";
+  if(byId("homeLatestAnn")){var srt0=annSorted();byId("homeLatestAnn").innerHTML=srt0.length?annCardHTML(srt0[0].a,srt0[0].i,false):'<p class="sub">—</p>';}
+  renderTeachers();
+  if(byId("ovClasses")) byId("ovClasses").textContent=classList().length;
+  if(byId("ovTeachers")) byId("ovTeachers").textContent=teachers.length;
+  var tot=students.length, avgA=Math.round(students.reduce(function(a,s){return a+attPct(s);},0)/Math.max(1,tot));
+  var best=students.slice().sort(function(a,b){return total(b)-total(a);})[0];
+  var left=students.reduce(function(a,s){return a+remain(s);},0);
+  var stats=[{l:t("totalStudents"),n:tot},{l:t("classesW"),n:classList().length},{l:t("avgAtt"),n:avgA+"%"},{l:t("topTotal"),n:best?total(best)+" / 600":"—",f:best?nameOf(best)+" · "+cls(best):""}];
+  if(byId("homeStats")) byId("homeStats").innerHTML=stats.map(function(x){return '<div class="card"><div class="stat-l">'+esc(x.l)+'</div><div class="stat-n">'+esc(x.n)+'</div>'+(x.f?'<div class="sub">'+esc(x.f)+"</div>":"")+"</div>";}).join("");
+  byId("publicStats").innerHTML=stats.map(function(x){return '<div class="card"><div class="stat-l">'+esc(x.l)+'</div><div class="stat-n">'+esc(x.n)+'</div>'+(x.f?'<div class="sub">'+esc(x.f)+"</div>":"")+"</div>";}).join("");
+}
+function openGrade(g){selGrade=g;var secs=sections(g);if(secs.indexOf(selSection)===-1)selSection=secs[0]||"A";showView("grade");renderGrade();}
+function renderGrade(){
+  var g=selGrade,l=inGrade(g);byId("gdTitle").textContent=g;byId("gdSub").textContent=l.length+" "+t("studentsW")+" "+t("inGrade");
+  var avg=l.length?Math.round(l.reduce(function(a,s){return a+attPct(s);},0)/l.length):0;var top=l.slice().sort(function(a,b){return total(b)-total(a);})[0];
+  byId("gdStats").innerHTML=[{l:t("totalStudents"),n:l.length},{l:t("classesW"),n:sections(g).join(", ")||"—"},{l:t("avgAtt"),n:avg+"%"},{l:t("topTotal"),n:top?total(top)+" / 600":"—"}].map(function(x){return '<div class="card"><div class="stat-l">'+esc(x.l)+'</div><div class="stat-n" style="font-size:24px">'+esc(x.n)+"</div></div>";}).join("");
+  byId("gdClassTabs").innerHTML=sections(g).map(function(s){return '<button type="button" role="tab" data-sec="'+s+'" aria-selected="'+(s===selSection)+'">'+g+"-"+s+"</button>";}).join("");
+  byId("gdClassTabs").querySelectorAll("[data-sec]").forEach(function(b){b.addEventListener("click",function(){selSection=b.getAttribute("data-sec");renderGrade();});});
+  var cl=l.filter(function(s){return s.section===selSection;});
+  var ranked=cl.slice().sort(function(a,b){return total(b)-total(a);});
+  var ctop=ranked[0];
+  var clsStr=g+"-"+selSection;var ht=headTeacherFor(clsStr);
+  if(byId("gdHeadTeacher")){byId("gdHeadTeacher").innerHTML=ht?'<div class="head-teacher-card"><img class="avatar" src="'+ht.photo+'" alt="Sample photo of '+esc(ht.en)+'"/><div style="min-width:200px;flex:1"><span class="head-badge">'+esc(t("headTeacherW"))+' · '+esc(clsStr)+'</span><div style="font-weight:800;font-size:18px;margin-top:6px">'+esc(teacherName(ht))+'</div><div class="sub">'+esc(lang==="my"?ht.en:ht.my)+' · '+esc(subj(ht.subject))+' · '+esc(ht.qual)+'</div><div class="sub">'+esc(t("headTeacherForW"))+' — '+esc(clsStr)+'</div></div></div>':"";}
+  var roster='<div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr><th>'+t("cStudent")+"</th><th>"+t("cAtt")+'</th></tr></thead><tbody>'+cl.map(function(s){return "<tr><td class='main'><strong>"+esc(nameOf(s))+'</strong><br/><span class="sub">'+s.id+"</span></td><td data-th='"+t("cAtt")+"'>"+attPct(s)+"% · "+t("present")+" "+s.att.p+" · "+t("absent")+" "+s.att.a+" · "+t("late")+" "+s.att.l+"</td></tr>";}).join("")+"</tbody></table></div>";
+  var marks='<div style="margin-bottom:8px"><span class="exam-tag">'+esc(examTagText())+'</span></div><div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr><th>'+t("cRank")+"</th><th>"+t("cStudent")+"</th>"+SUBJECTS.map(function(k){return "<th>"+subj(k)+"</th>";}).join("")+"<th>"+t("cTotal")+'</th></tr></thead><tbody>'+ranked.map(function(s,i){var m=getMarks(s);return "<tr><td data-th='"+t("cRank")+"'>"+(i+1)+"</td><td class='main'><strong>"+esc(nameOf(s))+"</strong>"+(i===0?' <span class="badge top">'+t("topInClass")+"</span>":"")+"</td>"+SUBJECTS.map(function(k){return "<td data-th='"+subj(k)+"'>"+m[k]+"</td>";}).join("")+"<td data-th='"+t("cTotal")+"'><strong>"+total(s)+"</strong> / 600</td></tr>";}).join("")+"</tbody></table></div>";
+  var attSum=cl.length?Math.round(cl.reduce(function(a,s){return a+attPct(s);},0)/cl.length):0;
+  byId("gdBody").innerHTML='<div class="card" style="margin-top:16px"><h3>'+g+"-"+selSection+'</h3>'+(ctop?'<div class="flex-photo" style="margin:12px 0"><img class="avatar" src="'+studentPhoto(ctop)+'" alt="Sample photo"/><div><span class="badge top">'+t("topInClass")+'</span><div style="font-weight:800;margin-top:4px">'+esc(nameOf(ctop))+' · '+total(ctop)+'/600</div><div class="photo-note">'+t("photoNote")+'</div></div></div>':"")+'<div class="sub" style="margin-top:10px;font-weight:700">'+t("attH")+" — "+attSum+'%</div><div class="progress" style="margin:8px 0 14px"><i style="width:'+attSum+'%"></i></div><h4 style="margin:14px 0 6px">'+t("rosterH")+"</h4>"+roster+'<h4 style="margin:18px 0 6px">'+esc(examTagText())+' — '+(lang==="my"?"အဆင့်အလိုက်":"Ranked")+"</h4>"+marks+"</div>";
+  byId("gdTtH").textContent=(lang==="my"?"အချိန်ဇယား":"Timetable")+" · "+g+"-"+selSection;
+  var days=t("days"),pers=t("periods"),tt=ttFor(g,selSection);
+  byId("gdTtHead").innerHTML="<th></th>"+pers.map(function(p){return "<th>"+p+"</th>";}).join("");
+  byId("gdTtRows").innerHTML=tt.map(function(r,di){return "<tr><td><strong>"+days[di]+"</strong></td>"+r.map(function(k){return "<td>"+subj(k)+"</td>";}).join("")+"</tr>";}).join("");
+}
+/* ---------- admin ---------- */
+function renderAdmin(){
+  var tot=students.length,collected=students.reduce(function(a,s){return a+(s.fee-remain(s));},0),inv=students.reduce(function(a,s){return a+s.fee;},0),left=inv-collected;
+  var firstCls=classList()[4]||classList()[0];var fc=students.filter(function(s){return cls(s)===firstCls;});var pres=fc.filter(function(s){return attState[s.id]!=="absent";}).length;
+  var kpis=[{l:t("totalStudents"),n:tot},{l:t("todayAtt")+" ("+firstCls+")",n:fc.length?Math.round(pres/fc.length*100)+"%":"—"},{l:t("collected"),n:fmt(collected)},{l:t("feeLeft"),n:fmt(left)}];
+  byId("adminKpis").innerHTML=kpis.map(function(x){return '<div class="card"><div class="stat-l">'+esc(x.l)+'</div><div class="stat-n" style="font-size:23px">'+esc(x.n)+"</div></div>";}).join("");
+  var pct=inv?Math.round(collected/inv*100):0;byId("feeProgBar").style.width=pct+"%";byId("feeProgSub").textContent=pct+"% "+t("collected");
+  byId("feeProgKv").innerHTML="<dt>"+t("collected")+"</dt><dd>"+fmt(collected)+"</dd><dt>"+t("invoiced")+"</dt><dd>"+fmt(inv)+"</dd><dt>"+t("left")+"</dt><dd>"+fmt(left)+"</dd>";
+  byId("adminTop").innerHTML=topHTML();
+  fillSelects();renderStudents();renderAtt();renderMarks();renderFees();renderTeachers();
+}
+function fillSelects(){
+  var gf=byId("stuGradeF");var pv=gf.value;gf.innerHTML='<option value="">'+t("allGrades")+"</option>"+GRADES.map(function(g){return '<option value="'+g+'">'+g+"</option>";}).join("");gf.value=pv||"";
+  byId("fGrade").innerHTML=GRADES.map(function(g){return "<option"+(g==="Grade 5"?" selected":"")+">"+g+"</option>";}).join("");
+  var opts=classList().map(function(c){return "<option>"+c+"</option>";}).join("");var pa=byId("attClass").value,pm=byId("marksClass").value;
+  byId("attClass").innerHTML=opts;byId("marksClass").innerHTML=opts;
+  if(classList().indexOf(pa)>-1)byId("attClass").value=pa; if(classList().indexOf(pm)>-1)byId("marksClass").value=pm;
+}
+function renderStudents(){
+  var q=(byId("stuSearch").value||"").toLowerCase(),gf=byId("stuGradeF").value,cf=byId("stuClassF").value;
+  var list=students.filter(function(s){if(gf&&s.grade!==gf)return false;if(cf&&s.section!==cf)return false;if(q&&(s.en+" "+(s.my||"")+" "+s.id+" "+s.phone+" "+s.parent).toLowerCase().indexOf(q)===-1)return false;return true;});
+  byId("stuCount").textContent=t("showing")+" "+list.length+" "+t("ofW")+" "+students.length+" "+t("studentsW");
+  byId("stuTable").innerHTML=list.length?'<div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr><th>'+t("cStudent")+"</th><th>"+t("cClass")+"</th><th>"+t("cParent")+"</th><th>"+t("cPhone")+"</th><th>"+t("cAge")+"</th><th>"+t("cAtt")+"</th><th>"+t("cFee")+"</th><th>"+t("cActions")+'</th></tr></thead><tbody>'+list.map(function(s){return "<tr><td class='main'><strong>"+esc(nameOf(s))+'</strong><br/><span class="sub">'+s.id+"</span></td><td data-th='"+t("cClass")+"'>"+cls(s)+"</td><td data-th='"+t("cParent")+"'>"+esc(s.parent)+"</td><td data-th='"+t("cPhone")+"'>"+esc(s.phone)+"</td><td data-th='"+t("cAge")+"'>"+s.age+"</td><td data-th='"+t("cAtt")+"'>"+attPct(s)+"%</td><td data-th='"+t("cFee")+"'>"+feeBadge(s)+'<br/><span class="sub">'+fmt(s.fee)+"</span></td><td><button type='button' class='btn ghost small' data-edit='"+s.id+"'>"+t("edit")+"</button> <button type='button' class='btn danger small' data-del='"+s.id+"'>"+t("del")+"</button></td></tr>";}).join("")+"</tbody></table></div>":'<p class="sub">'+t("noStu")+"</p>";
+  byId("stuTable").querySelectorAll("[data-del]").forEach(function(b){b.addEventListener("click",function(){students=students.filter(function(s){return s.id!==b.getAttribute("data-del");});byId("stuMsg").textContent=t("deleted");renderAll();});});
+  byId("stuTable").querySelectorAll("[data-edit]").forEach(function(b){b.addEventListener("click",function(){var s=null;students.forEach(function(x){if(x.id===b.getAttribute("data-edit"))s=x;});if(!s)return;byId("stuForm").classList.remove("hidden");byId("fId").value=s.id;byId("fNameEn").value=s.en;byId("fNameMy").value=s.my||"";byId("fGrade").value=s.grade;byId("fSection").value=s.section;byId("fAge").value=s.age;byId("fParent").value=s.parent;byId("fPhone").value=s.phone;byId("fFee").value=s.feeStatus;window.scrollTo({top:0,behavior:"smooth"});});});
+}
+function classStudents(selId){var v=byId(selId).value||"Grade 5-A";var p=v.split("-");return students.filter(function(s){return s.grade===p[0]&&s.section===p[1];});}
+function renderAtt(){byId("attDate").textContent=t("todayLabel");var list=classStudents("attClass");
+  byId("attList").innerHTML=list.map(function(s){var st=attState[s.id]||"present";return '<div class="att-row"><div><strong>'+esc(nameOf(s))+'</strong><br/><span class="sub">'+s.id+" · "+cls(s)+'</span></div><div class="att-btns"><button type="button" class="p" data-att="'+s.id+':present" aria-pressed="'+(st==="present")+'">'+t("present")+'</button><button type="button" class="l" data-att="'+s.id+':late" aria-pressed="'+(st==="late")+'">'+t("late")+'</button><button type="button" class="a" data-att="'+s.id+':absent" aria-pressed="'+(st==="absent")+'">'+t("absent")+"</button></div></div>";}).join("");
+  var p=list.filter(function(s){return attState[s.id]==="present";}).length,l2=list.filter(function(s){return attState[s.id]==="late";}).length;
+  byId("attSummary").textContent=t("present")+" "+p+" · "+t("late")+" "+l2+" · "+t("absent")+" "+(list.length-p-l2);
+  byId("attList").querySelectorAll("[data-att]").forEach(function(b){b.addEventListener("click",function(){var x=b.getAttribute("data-att").split(":");attState[x[0]]=x[1];byId("attMsg").textContent=t("attSaved");renderAtt();});});}
+function renderMarks(){renderExamUI();var rows=classStudents("marksClass").map(function(s){var m=getMarks(s);return{s:s,m:m,tot:totalFor(s)};}).sort(function(a,b){return b.tot-a.tot;});
+  byId("marksHead").innerHTML="<th>"+t("cStudent")+" · "+esc(examTagText())+"</th>"+SUBJECTS.map(function(k){return "<th>"+subj(k)+"</th>";}).join("")+"<th>"+t("cTotal")+"</th><th>"+t("cRank")+"</th>";
+  byId("marksRows").innerHTML=rows.map(function(r,i){return "<tr><td class='main'><strong>"+esc(nameOf(r.s))+"</strong><br/><span class='sub'>"+esc(examTagText())+"</span></td>"+SUBJECTS.map(function(k){return "<td data-th='"+subj(k)+"'><input class='mark-edit' type='number' min='0' max='100' value='"+r.m[k]+"' data-mk='"+r.s.id+":"+k+"'/></td>";}).join("")+"<td data-th='"+t("cTotal")+"'><strong>"+r.tot+"</strong> / 600</td><td data-th='"+t("cRank")+"'>"+(i+1)+"</td></tr>";}).join("");
+  byId("marksRows").querySelectorAll("[data-mk]").forEach(function(inp){inp.addEventListener("change",function(){var x=inp.getAttribute("data-mk").split(":");students.forEach(function(s){if(s.id===x[0]){var v=Math.max(0,Math.min(100,parseInt(inp.value,10)||0));if(!s.examMarks)s.examMarks=makeExamMarks(s.marks||{},5);if(!s.examMarks[currentExam])s.examMarks[currentExam]={};s.examMarks[currentExam][x[1]]=v;if(currentExam==="dec")s.marks[x[1]]=v;}});renderMarks();renderHome();if(selGrade)renderGrade();renderAdminTopOnly();});});}
+function renderHeadAssign(){var el=byId("headAssignList");if(!el)return;el.innerHTML=sortedClassesDesc().map(function(c){var cur=headMap[c]||"";return '<div class="assign-row"><strong style="min-width:110px">'+esc(c)+'</strong><select data-head-class="'+esc(c)+'" aria-label="Head teacher for '+esc(c)+'">'+teachers.map(function(te){return '<option value="'+te.id+'"'+(te.id===cur?" selected":"")+'>'+esc(te.en)+' — '+esc(subj(te.subject))+'</option>';}).join("")+'</select></div>';}).join("");el.querySelectorAll("[data-head-class]").forEach(function(sel){sel.addEventListener("change",function(){var c=sel.getAttribute("data-head-class");headMap[c]=sel.value;var hm=byId("headMsg");if(hm)hm.textContent=c+": "+t("headTeacherW")+" updated.";renderTeachers();if(selGrade)renderGrade();});});}
+function renderAdminTopOnly(){byId("adminTop").innerHTML=topHTML();}
+function renderFees(){var desc=GRADES.slice().reverse();var left=students.reduce(function(a,s){return a+remain(s);},0);var paidN=students.filter(function(s){return s.feeStatus==="paid";}).length;
+  byId("feesSummary").textContent=paidN+" / "+students.length+" "+t("paid")+" · "+fmt(left)+" "+t("left");
+  byId("feeGroups").innerHTML=desc.map(function(g){var l=inGrade(g);if(!l.length)return"";var gl=l.reduce(function(a,s){return a+remain(s);},0);var pn=l.filter(function(s){return s.feeStatus==="paid";}).length;
+    return '<div style="margin-top:18px"><h4 style="border-bottom:2px solid var(--primary-soft);padding-bottom:6px;margin-bottom:8px">'+g+" · "+pn+"/"+l.length+" "+t("paidN")+" · "+fmt(gl)+" "+t("left")+'</h4><div class="tbl-wrap"><table class="tbl tbl-stack"><thead><tr><th>'+t("cStudent")+"</th><th>"+t("cClass")+"</th><th>"+t("cAmount")+"</th><th>"+t("cMethod")+"</th><th>"+t("cStatus")+"</th><th></th></tr></thead><tbody>"+l.map(function(s){return "<tr><td class='main'><strong>"+esc(nameOf(s))+'</strong><br/><span class="sub">'+s.id+"</span></td><td data-th='"+t("cClass")+"'>"+cls(s)+"</td><td data-th='"+t("cAmount")+"'>"+fmt(s.fee)+(remain(s)?'<br/><span class="sub">'+fmt(remain(s))+" "+t("left")+"</span>":"")+"</td><td data-th='"+t("cMethod")+"'>"+esc(s.method)+"</td><td data-th='"+t("cStatus")+"'>"+feeBadge(s)+"</td><td>"+(s.feeStatus==="paid"?'<button type="button" class="btn ghost small" data-fee="'+s.id+':unpaid">'+t("undo")+"</button>":'<button type="button" class="btn small" data-fee="'+s.id+':paid">'+t("markPaid")+"</button>")+"</td></tr>";}).join("")+"</tbody></table></div></div>";}).join("");
+  byId("feeGroups").querySelectorAll("[data-fee]").forEach(function(b){b.addEventListener("click",function(){var x=b.getAttribute("data-fee").split(":");students.forEach(function(s){if(s.id===x[0]){s.feeStatus=x[1];if(x[1]==="paid"&&s.method==="—")s.method="KBZPay";if(x[1]==="unpaid")s.method="—";}});renderFees();renderStudents();});});}
+/* ---------- view switching ---------- */
+function showView(n){if(n==="public")n="home";var el=byId("view-"+n);if(!el)n="home";document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});byId("view-"+n).classList.add("active");var lb=byId("logoutBtn");if(lb)lb.classList.toggle("hidden",!isAdmin);var ab=byId("adminBtn");if(ab){ab.classList.toggle("hidden",isAdmin);ab.setAttribute("aria-pressed",n==="admin"||n==="login");}var pb=byId("publicBtn");if(pb)pb.setAttribute("aria-pressed",["home","announcements","grades","grade","teachers","top","overview"].indexOf(n)>-1);syncSidebar(n);window.scrollTo({top:0,behavior:"smooth"});}
+function renderAll(){applyStatic();renderAnn();renderHome();renderExamUI();if(isAdmin)renderAdmin();if(selGrade&&byId("view-grade").classList.contains("active"))renderGrade();renderExamUI();}
+/* events */
+byId("langEn").addEventListener("click",function(){lang="en";renderAll();});
+byId("langMy").addEventListener("click",function(){lang="my";renderAll();});
+byId("publicBtn").addEventListener("click",function(){showView("public");});
+byId("gdBack").addEventListener("click",function(){showView("grades");});
+byId("loginBack").addEventListener("click",function(){showView("public");});
+byId("adminBtn").addEventListener("click",function(){if(isAdmin)showView("admin");else{byId("loginError").textContent="";showView("login");}});
+byId("logoutBtn").addEventListener("click",function(){isAdmin=false;showView("public");});
+var ADMIN_PASS_HASH="240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9";
+byId("loginForm").addEventListener("submit",function(e){e.preventDefault();var u=(byId("loginUser").value||"").trim().toLowerCase();var p=byId("loginPass").value||"";var okUser=(u==="admin"||u==="admin@shwepyisoe.edu.mm");function fail(){byId("loginError").textContent=t("loginError");}function done(ok){if(okUser&&ok){isAdmin=true;byId("loginPass").value="";byId("loginError").textContent="";renderAll();showView("admin");}else{fail();}}
+  if(window.crypto&&crypto.subtle&&crypto.subtle.digest){crypto.subtle.digest("SHA-256",new TextEncoder().encode(p)).then(function(buf){var hex=Array.prototype.map.call(new Uint8Array(buf),function(b){return ("0"+b.toString(16)).slice(-2);}).join("");done(hex===ADMIN_PASS_HASH);}).catch(function(){fail();});}else{fail();}});
+document.querySelectorAll("[data-atab]").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("[data-atab]").forEach(function(x){x.setAttribute("aria-selected",x===b);});document.querySelectorAll(".panel").forEach(function(p){p.classList.remove("active");});byId("ap-"+b.getAttribute("data-atab")).classList.add("active");});});
+byId("stuSearch").addEventListener("input",renderStudents);byId("stuGradeF").addEventListener("change",renderStudents);byId("stuClassF").addEventListener("change",renderStudents);
+byId("stuAddToggle").addEventListener("click",function(){byId("stuForm").classList.toggle("hidden");byId("fId").value="";});
+byId("stuCancel").addEventListener("click",function(){byId("stuForm").classList.add("hidden");});
+byId("stuForm").addEventListener("submit",function(e){e.preventDefault();var id=byId("fId").value;var g=byId("fGrade").value;
+  if(id){students.forEach(function(s){if(s.id===id){s.en=byId("fNameEn").value.trim();s.my=byId("fNameMy").value.trim();s.grade=g;s.section=byId("fSection").value;s.age=parseInt(byId("fAge").value,10)||0;s.parent=byId("fParent").value.trim();s.phone=byId("fPhone").value.trim()||"—";s.feeStatus=byId("fFee").value;s.fee=feeFor(g);}});}
+  else{var n=200;var nid="SPS-2026-"+n;var exists=function(x){return students.some(function(s){return s.id===x;});};while(exists(nid)){n++;nid="SPS-2026-"+n;}var mk={};SUBJECTS.forEach(function(k){mk[k]=0;});students.push({id:nid,en:byId("fNameEn").value.trim(),my:byId("fNameMy").value.trim(),grade:g,section:byId("fSection").value,age:parseInt(byId("fAge").value,10)||0,parent:byId("fParent").value.trim(),phone:byId("fPhone").value.trim()||"—",fee:feeFor(g),feeStatus:byId("fFee").value,method:"—",att:{p:0,a:0,l:0},marks:mk,examMarks:makeExamMarks(mk,n)});attState[nid]="present";}
+  byId("stuMsg").textContent=t("added");e.target.reset();byId("fGrade").value="Grade 5";renderAll();});
+byId("attClass").addEventListener("change",renderAtt);byId("marksClass").addEventListener("change",renderMarks);byId("marksExam").addEventListener("change",renderMarks);
+byId("attAll").addEventListener("click",function(){classStudents("attClass").forEach(function(s){attState[s.id]="present";});byId("attMsg").textContent=t("attSaved");renderAtt();});
+byId("annForm").addEventListener("submit",function(e){e.preventDefault();var dv=byId("annDate").value||"";var dstr="1 Nov 2026";if(dv){var MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var pp=dv.split("-");if(pp.length===3)dstr=(+pp[2])+" "+MON[(+pp[1])-1]+" "+pp[0];}var sum=byId("annSum").value.trim();var act=byId("annAction").value.trim();announcements.unshift({d:dstr,cat:byId("annCat").value||"general",important:byId("annImportant").value==="yes",isNew:true,target:byId("annTarget").value||"all",enT:byId("annTE").value.trim(),myT:byId("annTM").value.trim(),summaryEn:sum,summaryMy:sum,whenEn:dstr,whenMy:dstr,actionEn:act,actionMy:act,enB:byId("annB").value.trim(),myB:byId("annB").value.trim()});byId("annMsg").textContent=t("annPosted");e.target.reset();var ad=byId("annDate");if(ad)ad.value="2026-11-01";renderAnn();renderHome();});
+/* teachers events */
+if(byId("teachFilter")) byId("teachFilter").addEventListener("change",renderTeachers);
+if(byId("teachAddToggle")) byId("teachAddToggle").addEventListener("click",function(){byId("teachForm").classList.toggle("hidden");byId("tfId").value="";});
+if(byId("teachCancel")) byId("teachCancel").addEventListener("click",function(){byId("teachForm").classList.add("hidden");});
+if(byId("teachForm")) byId("teachForm").addEventListener("submit",function(e){e.preventDefault();var id=byId("tfId").value;var data={en:byId("tfNameEn").value.trim(),my:byId("tfNameMy").value.trim(),subject:byId("tfSubject").value,grade:byId("tfGrade").value.trim()||"—",qual:byId("tfQual").value.trim(),exp:parseInt(byId("tfExp").value,10)||0,photo:byId("tfPhoto").value.trim()||"https://randomuser.me/api/portraits/women/44.jpg"};if(id){teachers.forEach(function(te){if(te.id===id)Object.assign(te,data);});if(data.grade&&data.grade!=="—"&&sortedClassesDesc().indexOf(data.grade)>-1)headMap[data.grade]=id;}else{var nid="T"+Date.now();teachers.push(Object.assign({id:nid},data));if(data.grade&&data.grade!=="—"&&sortedClassesDesc().indexOf(data.grade)>-1)headMap[data.grade]=nid;}byId("teachMsg").textContent="Teacher saved.";e.target.reset();renderTeachers();renderHome();if(selGrade)renderGrade();});
+/* ---------- sidebar ---------- */
+var sbSection="home";
+function openSidebar(){byId("sidebar").classList.add("open");byId("sbOverlay").classList.add("show");byId("hambBtn").setAttribute("aria-expanded","true");}
+function closeSidebar(){byId("sidebar").classList.remove("open");byId("sbOverlay").classList.remove("show");byId("hambBtn").setAttribute("aria-expanded","false");}
+function setSbActive(key){sbSection=key;document.querySelectorAll("[data-sbnav]").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-sbnav")===key);});}
+function syncSidebar(n){
+  var adminMode=isAdmin&&n==="admin";
+  byId("sbPublicNav").classList.toggle("hidden",adminMode);
+  byId("sbAdminNav").classList.toggle("hidden",!adminMode);
+  byId("sbAdminBtn").classList.toggle("hidden",isAdmin);
+  byId("sbPublicBtn").classList.toggle("hidden",!adminMode);
+  byId("sbLogoutBtn").classList.toggle("hidden",!isAdmin);
+  var map={home:"home",announcements:"ann",grades:"grades",grade:"grades",teachers:"teachers",top:"top",overview:"overview"};
+  if(map[n]) setSbActive(map[n]);
+
+}
+function renderSbGrades(){}
+
+function scrollToSec(id){var el=byId(id);if(el){setTimeout(function(){el.scrollIntoView({behavior:"smooth",block:"start"});},60);}}
+document.querySelectorAll("[data-sbnav]").forEach(function(b){b.addEventListener("click",function(){
+  var k=b.getAttribute("data-sbnav");closeSidebar();
+  var map2={home:"home",ann:"announcements",grades:"grades",teachers:"teachers",top:"top",overview:"overview"};
+  if(map2[k]) showView(map2[k]);
+});});
+document.querySelectorAll("[data-goto]").forEach(function(b){b.addEventListener("click",function(){showView(b.getAttribute("data-goto"));});});
+
+byId("hambBtn").addEventListener("click",openSidebar);
+byId("sbClose").addEventListener("click",closeSidebar);
+byId("sbOverlay").addEventListener("click",closeSidebar);
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeSidebar();});
+byId("langEn2").addEventListener("click",function(){lang="en";renderAll();});
+byId("langMy2").addEventListener("click",function(){lang="my";renderAll();});
+byId("sbAdminBtn").addEventListener("click",function(){closeSidebar();if(isAdmin)showView("admin");else{byId("loginError").textContent="";showView("login");}});
+byId("sbPublicBtn").addEventListener("click",function(){closeSidebar();setSbActive("home");showView("home");});
+byId("sbLogoutBtn").addEventListener("click",function(){closeSidebar();isAdmin=false;setSbActive("home");showView("home");});
+document.querySelectorAll("#sbAdminNav [data-atab]").forEach(function(b){b.addEventListener("click",closeSidebar);});
+var _renderAllBase=renderAll;
+renderAll=function(){_renderAllBase();renderSbGrades();};
+renderAll();showView("home");
 </script>
 </body>
 </html>
