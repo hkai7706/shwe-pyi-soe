@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\PortalController;
+use App\Models\Student;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -26,6 +28,17 @@ Route::get('/media/{path}', function (string $path) {
 
     return Storage::disk('public')->response($path);
 })->where('path', '.*')->name('media');
+Route::get('/portraits/{type}/{id}', function (string $type, int $id) {
+    $model = match ($type) {
+        'students' => Student::findOrFail($id),
+        'teachers' => Teacher::findOrFail($id),
+        default => abort(404),
+    };
+
+    abort_unless($model->photo_data && $model->photo_mime, 404);
+
+    return response(base64_decode($model->photo_data), 200, ['Content-Type' => $model->photo_mime, 'Cache-Control' => 'public, max-age=86400']);
+})->whereNumber('id')->name('portrait');
 Route::get('/robots.txt', fn () => response("User-agent: *\nDisallow: /".config('school.admin_path')."/\n", 200, ['Content-Type' => 'text/plain']));
 Route::prefix(config('school.admin_path'))->middleware('noindex')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');

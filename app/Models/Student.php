@@ -11,9 +11,9 @@ class Student extends Model
 {
     protected $guarded = [];
 
-    public const PUBLIC_COLUMNS = ['id', 'school_class_id', 'name_en', 'name_my', 'photo', 'main_subject'];
+    public const PUBLIC_COLUMNS = ['id', 'school_class_id', 'name_en', 'name_my', 'photo', 'photo_mime', 'main_subject'];
 
-    protected $hidden = ['parent_name', 'parent_phone', 'date_of_birth', 'address', 'gender', 'enrolled_on'];
+    protected $hidden = ['parent_name', 'parent_phone', 'date_of_birth', 'address', 'gender', 'enrolled_on', 'photo_data'];
 
     protected function casts(): array
     {

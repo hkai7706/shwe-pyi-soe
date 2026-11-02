@@ -123,17 +123,14 @@ class AdminController extends Controller
         }
         $oldPhoto = $record->photo;
         if ($request->hasFile('photo')) {
-            $data['photo'] = $request->file('photo')->store($resource, 'public');
+            $data['photo'] = null;
+            $data['photo_data'] = base64_encode($request->file('photo')->get());
+            $data['photo_mime'] = $request->file('photo')->getMimeType();
         }
-        try {
-            $record->fill($data)->save();
-        } catch (\Throwable $exception) {
-            if (isset($data['photo'])) {
-                Storage::disk('public')->delete($data['photo']);
-            }
-            throw $exception;
-        }
-        if (isset($data['photo']) && $oldPhoto) {
+
+        $record->fill($data)->save();
+
+        if ($request->hasFile('photo') && $oldPhoto) {
             Storage::disk('public')->delete($oldPhoto);
         }
 

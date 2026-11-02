@@ -10,9 +10,9 @@ class Teacher extends Model
 {
     protected $guarded = [];
 
-    public const PUBLIC_COLUMNS = ['id', 'name_en', 'name_my', 'photo', 'subject', 'qualification', 'experience_years', 'main_grade_id'];
+    public const PUBLIC_COLUMNS = ['id', 'name_en', 'name_my', 'photo', 'photo_mime', 'subject', 'qualification', 'experience_years', 'main_grade_id'];
 
-    protected $hidden = ['phone'];
+    protected $hidden = ['phone', 'photo_data'];
 
     public function grade(): BelongsTo
     {

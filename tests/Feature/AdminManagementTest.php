@@ -46,23 +46,20 @@ class AdminManagementTest extends TestCase
 
     public function test_student_crud_replaces_and_deletes_portraits_and_private_data_remains_private(): void
     {
-        Storage::fake('public');
         $data = ['name_en' => 'New Sample Student', 'name_my' => 'နမူနာ ကျောင်းသား', 'school_class_id' => SchoolClass::first()->id,
             'gender' => 'female', 'date_of_birth' => '2015-01-01', 'parent_name' => 'Private Guardian Sentinel',
             'parent_phone' => '09976543210', 'address' => 'Private Address Sentinel', 'enrolled_on' => '2026-06-01', 'is_active' => 1];
         $this->post('/staff/students', $data + ['photo' => UploadedFile::fake()->createWithContent('first.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j3ioAAAAASUVORK5CYII='))])->assertRedirect(route('admin.records', 'students'))->assertSessionHasNoErrors();
         $student = Student::firstOrFail();
-        $firstPhoto = $student->photo;
-        Storage::disk('public')->assertExists($firstPhoto);
+        $this->assertNull($student->photo);
+        $this->assertNotNull($student->photo_data);
+        $this->get(route('portrait', ['type' => 'students', 'id' => $student->id]))->assertOk()->assertHeader('content-type', 'image/png');
         $this->get('/students/'.$student->id)->assertOk()->assertDontSee('Private Guardian Sentinel')->assertDontSee('09976543210')->assertDontSee('Private Address Sentinel');
         $this->put('/staff/students/'.$student->id, $data + ['photo' => UploadedFile::fake()->createWithContent('second.png', base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+j3ioAAAAASUVORK5CYII='))])->assertSessionHasNoErrors();
-        Storage::disk('public')->assertMissing($firstPhoto);
-        $secondPhoto = $student->fresh()->photo;
-        Storage::disk('public')->assertExists($secondPhoto);
+        $this->assertNotNull($student->fresh()->photo_data);
         $this->post('/staff/students', $data + ['photo' => UploadedFile::fake()->create('fake.php', 1)])->assertSessionHasErrors('photo');
         $this->delete('/staff/students/'.$student->id)->assertSessionHasNoErrors();
         $this->assertDatabaseMissing('students', ['id' => $student->id]);
-        Storage::disk('public')->assertMissing($secondPhoto);
     }
 
     public function test_uploaded_portraits_are_served_without_a_public_storage_symlink(): void
