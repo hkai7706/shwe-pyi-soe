@@ -38,7 +38,8 @@ class SampleDataSeeder extends Seeder
                     for ($number = 1; $number <= 2; $number++) {
                         $student = Student::firstOrCreate(['name_en' => 'Sample '.($number === 1 ? 'Thiri' : 'Min').' '.$grade->level.$class->section],
                             ['name_my' => 'နမူနာ '.($number === 1 ? 'သီရိ' : 'မင်း').' '.$grade->level.$class->section,
-                                'school_class_id' => $class->id, 'gender' => $number === 1 ? 'female' : 'male',
+                                'school_class_id' => $class->id, 'main_subject' => $grade->level >= 10 ? ($number === 1 ? 'biology' : 'economics') : null,
+                                'gender' => $number === 1 ? 'female' : 'male',
                                 'date_of_birth' => now()->subYears(5 + $grade->level)->toDateString(), 'parent_name' => 'Fictional Guardian '.$class->id.$number,
                                 'parent_phone' => '09912345678', 'address' => 'Fictional sample address', 'enrolled_on' => now()->month(6)->startOfMonth()->toDateString(), 'is_active' => true]);
                         foreach (Exam::all() as $exam) {

@@ -65,6 +65,30 @@ class AdminManagementTest extends TestCase
         Storage::disk('public')->assertMissing($secondPhoto);
     }
 
+    public function test_upper_grade_students_require_and_store_a_main_subject(): void
+    {
+        $gradeTenClass = SchoolClass::query()->whereHas('grade', fn ($query) => $query->where('level', 10))->firstOrFail();
+        $data = ['name_en' => 'Upper Grade Student', 'name_my' => 'Upper Grade Student', 'school_class_id' => $gradeTenClass->id,
+            'gender' => 'female', 'date_of_birth' => '2010-01-01', 'parent_name' => 'Guardian', 'parent_phone' => '09900000000',
+            'address' => null, 'enrolled_on' => '2026-06-01', 'is_active' => 1];
+
+        $this->post('/staff/students', $data)->assertSessionHasErrors('main_subject');
+        $this->post('/staff/students', $data + ['main_subject' => 'biology'])->assertSessionHasNoErrors();
+
+        $this->assertDatabaseHas('students', ['name_en' => 'Upper Grade Student', 'main_subject' => 'biology']);
+    }
+
+    public function test_fees_are_shown_only_for_the_selected_class(): void
+    {
+        $class = SchoolClass::firstOrFail();
+        $student = Student::create(['name_en' => 'Fee Student', 'name_my' => 'Fee Student', 'school_class_id' => $class->id,
+            'gender' => 'male', 'date_of_birth' => '2015-01-01', 'parent_name' => 'Guardian', 'parent_phone' => '09900000000',
+            'enrolled_on' => '2026-06-01', 'is_active' => true]);
+
+        $this->get('/staff/fees')->assertOk()->assertDontSee('Fee Student');
+        $this->get('/staff/fees?class='.$class->id)->assertOk()->assertSee('Fee Student');
+    }
+
     public function test_teacher_crud_and_head_assignment(): void
     {
         $data = ['name_en' => 'New Sample Teacher', 'name_my' => 'နမူနာ ဆရာ', 'main_grade_id' => Grade::first()->id, 'subject' => 'English', 'qualification' => 'B.Ed.', 'experience_years' => 8, 'phone' => '09988887777'];
@@ -102,6 +126,6 @@ class AdminManagementTest extends TestCase
         $this->put('/staff/settings', array_replace($data, ['current_password' => 'InitialPassword123!']))->assertSessionHasNoErrors();
         $this->assertEquals('updatedadmin', auth()->user()->fresh()->username);
         $this->assertTrue(Hash::check('NewPassword123!', auth()->user()->fresh()->password));
-        $this->assertSame('School updated',Setting::valueFor('name_en'));
+        $this->assertSame('School updated', Setting::valueFor('name_en'));
     }
 }

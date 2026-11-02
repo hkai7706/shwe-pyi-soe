@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use App\Models\Attendance;
 use App\Models\Exam;
-use App\Models\Fee;
 use App\Models\Grade;
 use App\Models\Mark;
 use App\Models\SchoolClass;
@@ -53,14 +52,21 @@ class AdminController extends Controller
         $request->validate(['grade' => ['nullable', 'exists:grades,id'], 'class' => ['nullable', 'exists:school_classes,id'], 'search' => ['nullable', 'string', 'max:100']]);
         $query = ($this->model($resource))::query();
         if ($resource === 'students') {
-            $query->with(['schoolClass.grade', 'fee'])->withCount(['attendance', 'attendance as attended_count' => fn ($q) => $q->whereIn('status', ['present', 'late'])]);
+            $query->select('students.*')
+                ->join('school_classes', 'students.school_class_id', '=', 'school_classes.id')
+                ->join('grades', 'school_classes.grade_id', '=', 'grades.id')
+                ->with(['schoolClass.grade', 'fee'])
+                ->withCount(['attendance', 'attendance as attended_count' => fn ($q) => $q->whereIn('status', ['present', 'late'])]);
             if ($request->filled('grade')) {
                 $query->whereHas('schoolClass', fn ($q) => $q->where('grade_id', $request->grade));
             }
             if ($request->filled('class')) {
                 $query->where('school_class_id', $request->class);
             }
-            $query->orderBy('school_class_id')->orderBy('name_en');
+            $query->orderByDesc('grades.level')
+                ->orderByRaw("case students.main_subject when 'biology' then 0 when 'economics' then 1 else 2 end")
+                ->orderBy('school_classes.section')
+                ->orderBy('students.name_en');
         } elseif ($resource === 'teachers') {
             $query->with(['grade', 'headedClasses.grade'])->orderByDesc('main_grade_id')->orderBy('name_en');
         } else {
@@ -88,6 +94,8 @@ class AdminController extends Controller
         $record = $id ? $model::findOrFail($id) : new $model;
         $rules = match ($resource) {
             'students' => ['name_en' => 'required|string|max:255', 'name_my' => 'required|string|max:255', 'school_class_id' => 'required|exists:school_classes,id',
+                'main_subject' => ['nullable', Rule::requiredIf(fn (): bool => SchoolClass::query()->whereKey($request->input('school_class_id'))
+                    ->whereHas('grade', fn ($query) => $query->where('level', '>=', 10))->exists()), Rule::in(['biology', 'economics'])],
                 'gender' => ['required', Rule::in(['male', 'female', 'other'])], 'date_of_birth' => 'required|date|before:today', 'parent_name' => 'required|string|max:255',
                 'parent_phone' => 'required|string|max:40', 'address' => 'nullable|string|max:2000', 'enrolled_on' => 'required|date', 'is_active' => 'boolean'],
             'teachers' => ['name_en' => 'required|string|max:255', 'name_my' => 'required|string|max:255', 'main_grade_id' => 'required|exists:grades,id',
@@ -104,6 +112,10 @@ class AdminController extends Controller
         unset($data['photo']);
         if ($resource === 'students') {
             $data['is_active'] = $request->boolean('is_active');
+            $class = SchoolClass::with('grade')->findOrFail($data['school_class_id']);
+            if ($class->grade->level < 10) {
+                $data['main_subject'] = null;
+            }
         }
         if ($resource === 'announcements') {
             $data['is_important'] = $request->boolean('is_important');
@@ -204,11 +216,18 @@ class AdminController extends Controller
         return back()->with('success', __('ui.saved'));
     }
 
-    public function fees(): View
+    public function fees(Request $request): View
     {
-        $fees = Fee::with('student.schoolClass.grade')->get();
+        $request->validate(['class' => ['nullable', 'exists:school_classes,id']]);
+        $class = $request->filled('class') ? SchoolClass::with('grade')->findOrFail($request->integer('class')) : null;
+        $students = $class?->students()
+            ->with('fee')
+            ->orderByRaw("case main_subject when 'biology' then 0 when 'economics' then 1 else 2 end")
+            ->orderBy('name_en')
+            ->get() ?? collect();
+        $fees = $students->pluck('fee')->filter();
 
-        return $this->render('fees', ['groups' => Grade::with(['classes.students.fee'])->orderByDesc('level')->get(), 'totals' => $this->reports->feeTotals($fees), 'reports' => $this->reports]);
+        return $this->render('fees', ['class' => $class, 'students' => $students, 'totals' => $this->reports->feeTotals($fees)]);
     }
 
     public function saveFee(Request $request, Student $student): RedirectResponse
