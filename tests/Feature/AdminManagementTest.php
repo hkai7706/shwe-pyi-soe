@@ -75,6 +75,8 @@ class AdminManagementTest extends TestCase
 
     public function test_upper_grade_students_require_and_store_a_main_subject(): void
     {
+        $this->get('/staff/students/create')->assertOk()->assertSee('Choose Biology or Economics');
+
         $gradeTenClass = SchoolClass::query()->whereHas('grade', fn ($query) => $query->where('level', 10))->firstOrFail();
         $data = ['name_en' => 'Upper Grade Student', 'name_my' => 'Upper Grade Student', 'school_class_id' => $gradeTenClass->id,
             'gender' => 'female', 'date_of_birth' => '2010-01-01', 'parent_name' => 'Guardian', 'parent_phone' => '09900000000',
