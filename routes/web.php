@@ -53,6 +53,7 @@ Route::prefix(config('school.admin_path'))->middleware('noindex')->group(functio
         Route::get('/fees', [AdminController::class, 'fees'])->name('admin.fees');
         Route::put('/fees/{student}', [AdminController::class, 'saveFee'])->name('admin.fees.save');
         Route::post('/head-teachers', [AdminController::class, 'assignHead'])->name('admin.head');
+        Route::post('/grade-head-teachers', [AdminController::class, 'assignGradeHead'])->name('admin.grade-head');
         Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
         Route::put('/settings', [AdminController::class, 'saveSettings'])->name('admin.settings.save');
         Route::get('/{resource}', [AdminController::class, 'records'])->whereIn('resource', ['students', 'teachers', 'announcements'])->name('admin.records');

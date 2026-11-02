@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
@@ -18,6 +19,11 @@ class Grade extends Model
     public function teachers(): HasMany
     {
         return $this->hasMany(Teacher::class, 'main_grade_id');
+    }
+
+    public function headTeacher(): BelongsTo
+    {
+        return $this->belongsTo(Teacher::class, 'head_teacher_id');
     }
 
     public function students(): HasManyThrough

@@ -273,6 +273,20 @@ class AdminController extends Controller
         return back()->with('success', __('ui.saved'));
     }
 
+    public function assignGradeHead(Request $request): RedirectResponse
+    {
+        $data = $request->validate(['grade' => ['required', 'exists:grades,id'], 'head_teacher_id' => ['nullable', 'exists:teachers,id']]);
+        $grade = Grade::findOrFail($data['grade']);
+
+        if ($data['head_teacher_id']) {
+            abort_unless(Teacher::whereKey($data['head_teacher_id'])->where('main_grade_id', $grade->id)->exists(), 422);
+        }
+
+        $grade->update(['head_teacher_id' => $data['head_teacher_id']]);
+
+        return back()->with('success', __('ui.saved'));
+    }
+
     public function settings(): View
     {
         return $this->render('settings');

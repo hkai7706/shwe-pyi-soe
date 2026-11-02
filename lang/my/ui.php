@@ -10,4 +10,5 @@ return [
     'fee_class_help' => 'Choose a class to view and manage its fee records.', 'choose_fee_class' => 'Choose a class above to view its fee records.',
     'main_subject_help' => 'Required for Grades 10, 11, and 12 only.',
     'choose_grade' => 'Choose a grade', 'teacher_grade_help' => 'Choose a grade to view its teachers and head teachers.', 'choose_teacher_grade' => 'Choose a grade above to view its teachers and head teachers.',
+    'grade_head_teacher' => 'Grade head teacher', 'class_head_teachers' => 'Class head teachers',
 ];
