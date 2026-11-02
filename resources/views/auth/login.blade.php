@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow">
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" type="image/png" href="{{ asset('school-logo.png') }}">
     <title>{{ __('ui.staff_portal') }} · Shwe Pyi Soe</title>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Myanmar:wght@400;500;600&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -12,7 +12,7 @@
 <body class="login-page">
     <main class="login-card card">
         <div class="login-brand">
-            <img class="school-logo login-logo" src="{{ asset('school-logo.jpg') }}" alt="Shwe Pyi Soe Private High School">
+            <img class="school-logo login-logo" src="{{ asset('school-logo.png') }}" alt="Shwe Pyi Soe Private High School">
             <h1>Shwe Pyi Soe</h1>
             <p>{{ __('ui.staff_portal') }}</p>
         </div>

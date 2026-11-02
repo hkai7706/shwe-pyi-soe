@@ -8,7 +8,7 @@
     @if ($isStaff)
         <meta name="robots" content="noindex,nofollow">
     @endif
-    <link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+    <link rel="icon" type="image/png" href="{{ asset('school-logo.png') }}">
     <title>@yield('title') · Shwe Pyi Soe</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
 
     <aside id="navigation" class="sidebar" :class="{ 'is-open': drawer }">
         <a href="{{ $isStaff ? route('admin.overview') : route('home') }}" class="brand">
-            <img class="school-logo" src="{{ asset('school-logo.jpg') }}" alt="{{ $settings['name_en'] ?? 'Shwe Pyi Soe Private High School' }}">
+            <img class="school-logo" src="{{ asset('school-logo.png') }}" alt="{{ $settings['name_en'] ?? 'Shwe Pyi Soe Private High School' }}">
             <span>
                 <strong>{{ Str::before($settings['name_en'] ?? 'Shwe Pyi Soe Private High School', ' Private High School') }}</strong>
                 <span>{{ __('ui.school') }}</span>
