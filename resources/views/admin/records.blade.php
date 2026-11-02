@@ -2,7 +2,7 @@
 @section('title',__('ui.'.$resource))
 @section('content')
 <div class="page-heading"><div><span class="eyebrow">{{ __('ui.staff_portal') }}</span><h1>{{ __('ui.'.$resource) }}</h1><p>{{ __('ui.'.($resource === 'students' ? 'students_intro' : 'admin_'.$resource.'_intro')) }}</p></div><a class="button" href="{{ route('admin.create',$resource) }}">+ {{ __('ui.create') }}</a></div>
-<form class="filter-bar card" method="GET"><label>{{ __('ui.search') }}<input name="search" value="{{ request('search') }}" placeholder="{{ __('ui.name') }}"></label>
+<form class="filter-bar card" method="GET">@if($resource !== 'teachers')<label>{{ __('ui.search') }}<input name="search" value="{{ request('search') }}" placeholder="{{ __('ui.name') }}"></label>@endif
 @if($resource === 'students')<label>{{ __('ui.grade') }}<select name="grade"><option value="">{{ __('ui.all_grades') }}</option>@foreach($grades as $grade)<option value="{{ $grade->id }}" @selected(request('grade') == $grade->id)>{{ $grade->localized('name') }}</option>@endforeach</select></label><label>{{ __('ui.class') }}<select name="class"><option value="">—</option>@foreach($classes as $class)<option value="{{ $class->id }}" @selected(request('class') == $class->id)>{{ $class->label }}</option>@endforeach</select></label>
 @elseif($resource === 'teachers')<label>{{ __('ui.grade') }}<select name="grade" required><option value="" disabled @selected(! $selectedGrade)>{{ __('ui.choose_grade') }}</option>@foreach($grades as $grade)<option value="{{ $grade->id }}" @selected($selectedGrade?->id === $grade->id)>{{ $grade->localized('name') }}</option>@endforeach</select><small>{{ __('ui.teacher_grade_help') }}</small></label>
 @endif<button class="button">{{ __('ui.filter') }}</button></form>
