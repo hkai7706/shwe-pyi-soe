@@ -1,0 +1,3 @@
+@props(['students'])
+<form class="card student-search" method="GET"><label>{{ __('ui.find_student') }}<input name="search" value="{{ request('search') }}" placeholder="{{ __('ui.find_student_placeholder') }}"></label><button class="button">{{ __('ui.search') }}</button></form>
+@if(request()->filled('search'))<div class="card search-results">@forelse($students as $student)<a href="{{ route('student',$student->id) }}"><x-avatar :person="$student"/><span><strong>{{ $student->localized('name') }}</strong><small>{{ $student->schoolClass->label }}</small></span></a>@empty<p>{{ __('ui.no_students_found') }}</p>@endforelse</div>@endif

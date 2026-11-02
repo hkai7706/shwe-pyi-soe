@@ -11,4 +11,8 @@ return [
     'main_subject_help' => 'Required for Grades 10, 11, and 12 only.',
     'choose_grade' => 'Choose a grade', 'teacher_grade_help' => 'Choose a grade to view its teachers and head teachers.', 'choose_teacher_grade' => 'Choose a grade above to view its teachers and head teachers.',
     'grade_head_teacher' => 'Grade head teacher', 'class_head_teachers' => 'Class head teachers',
+    'student_count' => '{1} :count Student|[2,*] :count Students', 'teacher_count' => '{1} :count Teacher|[2,*] :count Teachers', 'class_count' => '{1} :count Class|[2,*] :count Classes',
+    'no_students_yet' => 'No students yet', 'head_teacher_announced' => 'Head teacher to be announced', 'no_marks_yet' => 'No marks yet', 'joint_top' => 'Joint top', 'february' => 'February',
+    'find_student' => 'Find a student', 'find_student_placeholder' => 'Search by English or Myanmar name', 'no_students_found' => 'No students found.', 'community_location' => 'KG to Grade 12', 'community_location_detail' => 'South Dagon, Yangon', 'all' => 'All',
+    'hero_photo' => 'Homepage school photo', 'hero_photo_help' => 'JPG, PNG or WebP up to 48 KB. This appears on the homepage hero.',
 ];

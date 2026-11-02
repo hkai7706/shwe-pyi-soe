@@ -10,6 +10,7 @@ use App\Models\Student;
 use App\Models\Teacher;
 use App\Services\SchoolReport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\View\View;
 
 class PortalController extends Controller
@@ -23,27 +24,37 @@ class PortalController extends Controller
 
     public function home(Request $request): View
     {
+        $request->validate(['search' => ['nullable', 'string', 'max:100']]);
         $exam = $this->reports->exam($request->integer('exam') ?: null);
+        $studentCount = Student::where('is_active', true)->count();
+        $students = $this->studentSearch($request->input('search'));
 
-        return $this->render('home', ['studentCount' => Student::where('is_active', true)->count(), 'teacherCount' => Teacher::count(),
+        return $this->render('home', ['studentCount' => $studentCount, 'teacherCount' => Teacher::count(), 'showCommunitySummary' => $studentCount >= 20,
+            'students' => $students,
             'gradeCount' => Grade::count(), 'notice' => Announcement::published()->orderByDesc('is_important')->latest('published_at')->first(),
             'achievers' => $this->reports->achievers($exam)->take(4), 'exam' => $exam, 'exams' => Exam::orderBy('sort_order')->get()]);
     }
 
     public function announcements(Request $request): View
     {
-        $request->validate(['grade' => ['nullable', 'integer', 'exists:grades,id']]);
+        $request->validate(['grade' => ['nullable', 'integer', 'exists:grades,id'], 'category' => ['nullable', 'in:exam,holiday,fees,event,meeting,general']]);
         $query = Announcement::published()->orderByDesc('is_important')->latest('published_at');
         if ($request->filled('grade')) {
             $query->where(fn ($q) => $q->whereNull('target')->orWhereJsonContains('target', $request->integer('grade')));
+        }
+        if ($request->filled('category')) {
+            $query->where('category', $request->string('category'));
         }
 
         return $this->render('announcements', ['notices' => $query->paginate(12)->withQueryString(), 'grades' => Grade::orderBy('level')->get()]);
     }
 
-    public function grades(): View
+    public function grades(Request $request): View
     {
-        return $this->render('grades', ['grades' => Grade::withCount(['classes', 'teachers'])->with(['classes' => fn ($q) => $q->withCount(['students' => fn ($s) => $s->where('is_active', true)])])->orderBy('level')->get()]);
+        $request->validate(['search' => ['nullable', 'string', 'max:100']]);
+
+        return $this->render('grades', ['grades' => Grade::withCount(['classes', 'teachers'])->with(['classes' => fn ($q) => $q->withCount(['students' => fn ($s) => $s->where('is_active', true)])])->orderBy('level')->get(),
+            'students' => $this->studentSearch($request->input('search'))]);
     }
 
     public function grade(Request $request, Grade $grade): View
@@ -56,7 +67,7 @@ class PortalController extends Controller
 
         return $this->render('grade', compact('grade', 'classes', 'class', 'exam', 'rows') + ['exams' => Exam::orderBy('sort_order')->get(),
             'subjects' => $this->reports->subjects($class), 'timetable' => $class->timetables()->with(['subject', 'teacher' => fn ($q) => $q->select(Teacher::PUBLIC_COLUMNS)])->orderBy('period_no')->get(),
-            'studentCount' => Student::whereIn('school_class_id', $classes->modelKeys())->where('is_active', true)->count()]);
+            'studentCount' => $class->students()->where('is_active', true)->count()]);
     }
 
     public function student(int $student): View
@@ -83,5 +94,16 @@ class PortalController extends Controller
     public function overview(): View
     {
         return $this->render('overview');
+    }
+
+    private function studentSearch(?string $search): Collection
+    {
+        if (blank($search)) {
+            return collect();
+        }
+
+        return Student::select(Student::PUBLIC_COLUMNS)->where('is_active', true)
+            ->where(fn ($query) => $query->where('name_en', 'like', '%'.$search.'%')->orWhere('name_my', 'like', '%'.$search.'%'))
+            ->with('schoolClass.grade')->limit(8)->get();
     }
 }

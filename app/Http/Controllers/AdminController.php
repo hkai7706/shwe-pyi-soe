@@ -296,13 +296,19 @@ class AdminController extends Controller
     {
         $user = $request->user();
         $data = $request->validate(['name_en' => 'required|string|max:255', 'name_my' => 'required|string|max:255', 'address' => 'required|string|max:2000',
-            'phone' => 'nullable|string|max:40', 'facebook_url' => ['nullable', 'url:http,https', 'max:255'],
+            'phone' => 'nullable|string|max:40', 'facebook_url' => ['nullable', 'url:http,https', 'max:255'], 'hero_photo' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:48'],
             'username' => ['required', 'alpha_dash', 'max:100', Rule::unique('users')->ignore($user->id)],
             'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'current_password' => ['required', 'current_password'], 'password' => ['nullable', 'confirmed', Password::min(12)->mixedCase()->numbers()]]);
-        DB::transaction(function () use ($data, $user) {
+        $heroPhoto = $request->hasFile('hero_photo')
+            ? 'data:'.$request->file('hero_photo')->getMimeType().';base64,'.base64_encode($request->file('hero_photo')->get())
+            : null;
+        DB::transaction(function () use ($data, $user, $heroPhoto) {
             foreach (['name_en', 'name_my', 'address', 'phone', 'facebook_url'] as $key) {
                 Setting::updateOrCreate(['key' => $key], ['value' => $data[$key] ?? '']);
+            }
+            if ($heroPhoto) {
+                Setting::updateOrCreate(['key' => 'hero_photo'], ['value' => $heroPhoto]);
             }
             $account = ['username' => $data['username'], 'email' => $data['email']];
             if (! empty($data['password'])) {
