@@ -65,6 +65,17 @@ class AdminManagementTest extends TestCase
         Storage::disk('public')->assertMissing($secondPhoto);
     }
 
+    public function test_uploaded_portraits_are_served_without_a_public_storage_symlink(): void
+    {
+        Storage::fake('public');
+        Storage::disk('public')->put('students/portrait.jpg', 'portrait image');
+
+        $this->get(route('media', ['path' => 'students/portrait.jpg']))
+            ->assertOk()
+            ->assertHeader('content-type', 'image/jpeg');
+        $this->get(route('media', ['path' => 'students/missing.jpg']))->assertNotFound();
+    }
+
     public function test_upper_grade_students_require_and_store_a_main_subject(): void
     {
         $gradeTenClass = SchoolClass::query()->whereHas('grade', fn ($query) => $query->where('level', 10))->firstOrFail();

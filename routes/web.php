@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\PortalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::post('/language/{locale}', function (Request $request, string $locale) {
     abort_unless(in_array($locale, ['en', 'my'], true), 404);
@@ -20,6 +21,11 @@ Route::get('/students/{student}', [PortalController::class, 'student'])->whereNu
 Route::get('/teachers', [PortalController::class, 'teachers'])->name('teachers');
 Route::get('/top-achievers', [PortalController::class, 'achievers'])->name('achievers');
 Route::get('/overview', [PortalController::class, 'overview'])->name('overview');
+Route::get('/media/{path}', function (string $path) {
+    abort_unless(Storage::disk('public')->exists($path), 404);
+
+    return Storage::disk('public')->response($path);
+})->where('path', '.*')->name('media');
 Route::get('/robots.txt', fn () => response("User-agent: *\nDisallow: /".config('school.admin_path')."/\n", 200, ['Content-Type' => 'text/plain']));
 Route::prefix(config('school.admin_path'))->middleware('noindex')->group(function () {
     Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
