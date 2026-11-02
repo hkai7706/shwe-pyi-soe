@@ -107,6 +107,8 @@ class AdminManagementTest extends TestCase
         $class = SchoolClass::first();
         $this->post('/staff/head-teachers', ['class' => $class->id, 'head_teacher_id' => $teacher->id])->assertSessionHasNoErrors();
         $this->assertEquals($teacher->id, $class->fresh()->head_teacher_id);
+        $this->get('/staff/teachers')->assertOk()->assertDontSee('New Sample Teacher');
+        $this->get('/staff/teachers?grade='.$teacher->main_grade_id)->assertOk()->assertSee('New Sample Teacher')->assertSee($class->label);
         $this->put('/staff/teachers/'.$teacher->id, array_replace($data, ['experience_years' => 9]))->assertSessionHasNoErrors();
         $this->assertEquals(9, $teacher->fresh()->experience_years);
         $this->get('/teachers')->assertOk()->assertSee('New Sample Teacher')->assertDontSee('09988887777');

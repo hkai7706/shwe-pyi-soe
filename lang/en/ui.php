@@ -9,4 +9,5 @@ return [
     'main_subject' => 'Main subject', 'biology' => 'Biology', 'economics' => 'Economics', 'choose_main_subject' => 'Choose Biology or Economics',
     'fee_class_help' => 'Choose a class to view and manage its fee records.', 'choose_fee_class' => 'Choose a class above to view its fee records.',
     'main_subject_help' => 'Required for Grades 10, 11, and 12 only.',
+    'choose_grade' => 'Choose a grade', 'teacher_grade_help' => 'Choose a grade to view its teachers and head teachers.', 'choose_teacher_grade' => 'Choose a grade above to view its teachers and head teachers.',
 ];

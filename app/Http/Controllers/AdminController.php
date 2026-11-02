@@ -50,6 +50,9 @@ class AdminController extends Controller
     public function records(Request $request, string $resource): View
     {
         $request->validate(['grade' => ['nullable', 'exists:grades,id'], 'class' => ['nullable', 'exists:school_classes,id'], 'search' => ['nullable', 'string', 'max:100']]);
+        $selectedGrade = $resource === 'teachers' && $request->filled('grade')
+            ? Grade::findOrFail($request->integer('grade'))
+            : null;
         $query = ($this->model($resource))::query();
         if ($resource === 'students') {
             $query->select('students.*')
@@ -68,7 +71,13 @@ class AdminController extends Controller
                 ->orderBy('school_classes.section')
                 ->orderBy('students.name_en');
         } elseif ($resource === 'teachers') {
-            $query->with(['grade', 'headedClasses.grade'])->orderByDesc('main_grade_id')->orderBy('name_en');
+            $query->with(['grade', 'headedClasses.grade']);
+            if ($selectedGrade) {
+                $query->where('main_grade_id', $selectedGrade->id);
+            } else {
+                $query->whereRaw('1 = 0');
+            }
+            $query->orderBy('name_en');
         } else {
             $query->orderByDesc('is_important')->latest('published_at');
         }
@@ -78,7 +87,9 @@ class AdminController extends Controller
         }
 
         return $this->render('records', ['resource' => $resource, 'records' => $query->paginate(30)->withQueryString(),
-            'teachers' => $resource === 'teachers' ? Teacher::orderBy('name_en')->get() : collect()]);
+            'selectedGrade' => $selectedGrade,
+            'teachers' => $selectedGrade ? Teacher::where('main_grade_id', $selectedGrade->id)->orderBy('name_en')->get() : collect(),
+            'teacherClasses' => $selectedGrade ? $selectedGrade->classes()->orderBy('section')->get() : collect()]);
     }
 
     public function edit(string $resource, ?int $id = null): View
