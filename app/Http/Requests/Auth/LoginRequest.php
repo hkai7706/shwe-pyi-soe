@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Models\User;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -42,7 +44,17 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt([...$this->only('username', 'password'), 'is_admin' => true], $this->boolean('remember'))) {
+        $credentials = [...$this->only('username', 'password'), 'is_admin' => true];
+
+        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
+            $this->synchronizeConfiguredAdminPassword();
+
+            if (Auth::attempt($credentials, $this->boolean('remember'))) {
+                RateLimiter::clear($this->throttleKey());
+
+                return;
+            }
+
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -51,6 +63,36 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+    }
+
+    /**
+     * Synchronize an existing administrator's password with the configured recovery password.
+     */
+    private function synchronizeConfiguredAdminPassword(): void
+    {
+        $configuredPassword = config('school.admin_password');
+        $configuredUsername = config('school.admin_username');
+        $submittedUsername = (string) $this->input('username');
+        $submittedPassword = (string) $this->input('password');
+
+        if (blank($configuredPassword)
+            || ! hash_equals((string) $configuredUsername, $submittedUsername)
+            || ! hash_equals((string) $configuredPassword, $submittedPassword)) {
+            return;
+        }
+
+        $administrator = User::query()
+            ->where('username', $configuredUsername)
+            ->where('is_admin', true)
+            ->first();
+
+        if (! $administrator instanceof User) {
+            return;
+        }
+
+        $administrator->forceFill([
+            'password' => Hash::make($configuredPassword),
+        ])->save();
     }
 
     /**

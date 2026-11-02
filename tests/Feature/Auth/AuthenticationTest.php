@@ -4,6 +4,7 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Tests\TestCase;
 
@@ -29,6 +30,28 @@ class AuthenticationTest extends TestCase
         User::factory()->create(['username' => 'visitor', 'is_admin' => false]);
         $this->post('/staff/login', ['username' => 'visitor', 'password' => 'password'])->assertSessionHasErrors('username');
         $this->assertGuest();
+    }
+
+    public function test_configured_admin_password_synchronizes_an_existing_administrator(): void
+    {
+        config([
+            'school.admin_username' => 'principal',
+            'school.admin_password' => 'ConfiguredPassword123!',
+        ]);
+
+        $user = User::factory()->create([
+            'username' => 'principal',
+            'is_admin' => true,
+            'password' => 'PreviousPassword123!',
+        ]);
+
+        $this->post('/staff/login', [
+            'username' => 'principal',
+            'password' => 'ConfiguredPassword123!',
+        ])->assertRedirect(route('admin.overview'));
+
+        $this->assertAuthenticatedAs($user);
+        $this->assertTrue(Hash::check('ConfiguredPassword123!', $user->fresh()->password));
     }
 
     public function test_repeated_failures_are_rate_limited(): void
