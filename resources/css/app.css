@@ -10,3 +10,4 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 .group-row td{background:#edf4ed;color:var(--teal);padding:14px 18px;font-size:12px}
 .brand>span:last-child{min-width:0}.brand strong{text-transform:uppercase;overflow-wrap:anywhere}.brand span small{font-size:9px;line-height:1.9;overflow-wrap:anywhere}
+.school-logo{width:58px;height:58px;object-fit:contain;flex:0 0 58px;border-radius:50%;background:#fff}.login-logo{width:104px;height:104px;display:block;margin:0 auto 18px}
